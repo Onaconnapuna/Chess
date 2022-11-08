@@ -6,6 +6,6 @@ Piece::Piece() {
   value = "placeholder";
 }
 
-void Piece::add_value(string value) {
-  value = value;
+void Piece::add_value(Piece& piece, string value) {
+  piece.value = value;
 }

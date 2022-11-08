@@ -1,3 +1,4 @@
+#include <iostream>
 #include "board.h" 
 #include <vector>
 using namespace std;
@@ -15,11 +16,17 @@ void Board::place_pieces(Board& board) {
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       if (i > 1 && i < 6) { 
-        // NullPiece piece;
-        Piece piece;
-        piece.add_value("nil-square");
-        board.grid[i][j] = piece;
+        board.grid[i][j].add_value(board.grid[i][j],"nil-square");
       }  
     }
+  }
+}
+
+void Board::print_board(Board& board) {
+  for (int i = 0; i < board.grid.size(); i++) {
+    for (int j = 0; j < board.grid[i].size(); j++) {
+      std::cout << board.grid[i][j].value << " ";
+    }
+    std::cout << std::endl;
   }
 }

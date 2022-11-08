@@ -8,6 +8,6 @@ class Piece {
   string value;
 
   Piece();
-  void add_value(string value);
+  void add_value(Piece& piece,string value);
 
 }; 
