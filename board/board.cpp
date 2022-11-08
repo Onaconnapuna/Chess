@@ -1,5 +1,4 @@
 #include "board.h" 
-#include "../pieces/piece.h"
 #include <vector>
 using namespace std;
 
@@ -16,7 +15,7 @@ void Board::create_board()
   //   two_D_grid.push_back(one_D_grid);
   // }
 
-  vector<vector<int> > two_D_vector(8, vector<int>(8));
+  vector<vector<Piece> > two_D_vector(8, vector<Piece>(8));
 
   grid = two_D_vector;
 }
