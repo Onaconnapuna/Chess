@@ -16,7 +16,6 @@ void Board::place_pieces(Board& board) {
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       if (i > 1 && i < 6) {  
-        // board.grid[i][j].add_value(board.grid[i][j],"nil-square");
         NullPiece null_piece;
         board.grid[i][j] = null_piece;
       }  
@@ -34,5 +33,20 @@ void Board::print_board(Board& board) {
 }
 
 bool Board::move_piece(Board& board, int start_pos[2], int end_pos[2]) {
+  int start_x = start_pos[0];
+  int start_y = start_pos[1];
 
+  if (board.grid[start_x][start_y].value == "null-piece") return false;
+
+  int end_x = end_pos[0];
+  int end_y = end_pos[1];
+
+  if (board.grid[end_x][end_y].value == "placeholder") return false;
+
+  board.grid[end_x][end_y] = board.grid[start_x][start_y];
+
+  NullPiece null_piece;
+
+  board.grid[start_x][start_y] = null_piece;
+  return true;
 }
