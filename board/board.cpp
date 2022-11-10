@@ -15,8 +15,10 @@ void Board::create_board()
 void Board::place_pieces(Board& board) {
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
-      if (i > 1 && i < 6) { 
-        board.grid[i][j].add_value(board.grid[i][j],"nil-square");
+      if (i > 1 && i < 6) {  
+        // board.grid[i][j].add_value(board.grid[i][j],"nil-square");
+        NullPiece null_piece;
+        board.grid[i][j] = null_piece;
       }  
     }
   }

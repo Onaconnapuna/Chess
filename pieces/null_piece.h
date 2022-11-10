@@ -1,5 +1,12 @@
+// #include <string>
+// // #include "piece.h"
 
-class NullPiece : public Piece 
-{
+// using namespace std;
 
-};
+// class NullPiece : public Piece 
+// {
+
+//   public:
+//   NullPiece();
+
+// };

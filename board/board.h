@@ -1,6 +1,5 @@
 #include <vector>
-#include "../pieces/piece.h"
-#include "../pieces/null_piece.h"
+#include "../pieces/piece.cpp"
 using namespace std;
 
 class Board {

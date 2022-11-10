@@ -1,13 +1,16 @@
-#include <string>
-using namespace std;
+// #include <string>
+// #include "piece.h"
+// // #include "null_piece.h"
 
-class Piece {
+// Piece::Piece() {
+//   value = "placeholder";
+// }
 
-  public: 
+// void Piece::add_value(Piece& piece, string value) {
+//   piece.value = value;
+// }
 
-  string value;
+// NullPiece::NullPiece() {
+//   value = "null-piece";
+// }
 
-  Piece();
-  void add_value(Piece& piece,string value);
-
-}; 
