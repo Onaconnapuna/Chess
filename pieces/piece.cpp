@@ -1,28 +1,11 @@
 #include <string>
-// #include "null_piece.h"
+#include "piece.h"
 using namespace std;
 
-class Piece {
+Piece::Piece() {
+  value = "placeholder";
+}
 
-  public: 
-
-  string value;
-
-  Piece() {
-    value = "placeholder";
-  };
-  void add_value(Piece& piece,string value) {
-    piece.value = value;
-  };
-
-}; 
-
-class NullPiece : public Piece 
-{
-
-  public:
-  NullPiece() {
-    value = "null-piece";
-  };
-
-};
+void Piece::add_value(Piece& piece, string value) {
+  piece.value = value;
+}

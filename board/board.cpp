@@ -32,3 +32,7 @@ void Board::print_board(Board& board) {
     std::cout << std::endl;
   }
 }
+
+bool Board::move_piece(Board& board, int start_pos[2], int end_pos[2]) {
+
+}

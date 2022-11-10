@@ -1,12 +1,15 @@
-// #include <string>
-// // #include "piece.h"
+// #ifndef _NULLPIECE_
+// #define _NULLPIECE_
+#include <string>
+#include "piece.h"
+using namespace std;
 
-// using namespace std;
+class NullPiece : public Piece 
+{
 
-// class NullPiece : public Piece 
-// {
+  public:
+  NullPiece();
 
-//   public:
-//   NullPiece();
+};
 
-// };
+// #endif
