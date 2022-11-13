@@ -6,9 +6,20 @@ using namespace std;
 void Board::create_board() 
 {
   // initialize the 2D vector with type Piece with 8 vectors
-  vector<vector<Piece> > two_D_vector(8, vector<Piece>(8));
-
+  // std::vector<std::vector<Piece> > two_D_vector(8, std::vector<Piece>(8));
   // assign 2d vector to grid
+  // grid = two_D_vector;
+
+  std::vector<std::vector<Piece> > two_D_vector;
+
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      int position[2] = { i, j };
+      Piece empty_piece("placeholder", "whiteblack", position);
+      two_D_vector[i].push_back(empty_piece);
+    }
+  }
+
   grid = two_D_vector;
 }
 

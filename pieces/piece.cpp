@@ -1,11 +1,13 @@
 #include <string>
 #include "piece.h"
-using namespace std;
+#include <vector>
 
-Piece::Piece() {
-  value = "placeholder";
+Piece::Piece(int posX, int posY, std::string value, std::string color) {
+  value = value;
+  color = color;
+  position = { posX, posY };
 }
 
-void Piece::add_value(Piece& piece, string value) {
+void Piece::add_value(Piece& piece, std::string value) {
   piece.value = value;
 }
