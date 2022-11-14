@@ -1,4 +1,6 @@
 #include "null_piece.h"
-NullPiece::NullPiece() {
-  value = "null-piece";
+#include <string>
+NullPiece::NullPiece(int posX, int posY) : Piece(posX, posY) {
+  value = "empty_space";
+  color = "null_color";
 }

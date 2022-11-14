@@ -2,17 +2,19 @@
 #define _PIECE_
 #include <string>
 #include <vector>
-using namespace std;
 
 class Piece {
 
   public: 
-    string value;
-    string color;
+    std::string value = "placeholder";
+    std:: string color = "white/black";
     std::vector<int> position;
 
-    Piece(int posX, int posY, std::string value = "placeholder", std::string color = "whiteblack");
-    void add_value(Piece& piece, string value);
+    Piece(int posX, int posY);
+
+
+    void add_value(std::string value);
+    std::string get_value();
 
 };
 

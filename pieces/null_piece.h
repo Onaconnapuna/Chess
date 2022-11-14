@@ -1,14 +1,14 @@
 // #ifndef _NULLPIECE_
 // #define _NULLPIECE_
-#include <string>
+// #include <string>
 #include "piece.h"
-using namespace std;
 
-class NullPiece : public Piece 
+class NullPiece : public Piece
 {
 
   public:
-  NullPiece();
+
+    NullPiece(int posX, int posY);
 
 };
 
