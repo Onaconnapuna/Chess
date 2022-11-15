@@ -1,6 +1,5 @@
-// #ifndef _NULLPIECE_
-// #define _NULLPIECE_
-// #include <string>
+#ifndef _NULLPIECE_
+#define _NULLPIECE_
 #include "piece.h"
 
 class NullPiece : public Piece
@@ -12,4 +11,4 @@ class NullPiece : public Piece
 
 };
 
-// #endif
+#endif
