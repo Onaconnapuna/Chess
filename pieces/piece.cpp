@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "../board/board.h"
+#include <iostream>
 
 Piece::Piece(int posX, int posY) {
   position = { posX, posY };
@@ -19,7 +20,7 @@ std::string Piece::get_value() {
 std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
   
   std::vector<std::vector<int> > moves;
- 
+  bool valid_space = false;
   for (int i = 0; i < deltas.size(); i++) {
     int x = deltas[i][0];
     int y = deltas[i][1];
@@ -29,7 +30,7 @@ std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
     int adj_x = x + board_x;
     int adj_y = y + board_y;
 
-    bool valid_space = true;
+    valid_space = true;
     while (valid_space) {
       std::vector<int> adj_pos = { adj_x, adj_y }; 
       bool inboundsX = 0 <= adj_x && adj_x < 8;
@@ -39,21 +40,30 @@ std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
         valid_space = false;
         break;
       }
+
       if (board.grid[adj_x][adj_y].color == color) {
         valid_space = false;
         break; 
       }
-      if (board.grid[adj_x][adj_y].color != color) {
+
+      //for testing
+
+      if (board.grid[adj_x][adj_y].color == "white/black") {
         moves.push_back(adj_pos);
-        break;
-      } 
+      }
+
+      // if (board.grid[adj_x][adj_y].color != color) {
+      //   moves.push_back(adj_pos);
+      //   break;
+      // } 
 
       moves.push_back(adj_pos);
       adj_x += x;
       adj_y += y;
+      // std::cout << adj_x << adj_y << std::endl;
     } 
   }
 
-
+  return moves;
 }
 
