@@ -1,7 +1,7 @@
 #include "king.h"
 #include <string>
 
-KingPiece::KingPiece(int posX, int posY, std::string color) : Piece(posX, posY) {
+KingPiece::KingPiece(int posX, int posY, std::string add_color) : Piece(posX, posY) {
   value = "king";
-  color = color;
+  color = add_color;
 }

@@ -3,34 +3,61 @@
 #include <vector>
 using namespace std;
 
-void Board::create_board() 
-{
-  // initialize the 2D vector with type Piece with 8 vectors
-  // std::vector<std::vector<Piece> > two_D_vector(8, std::vector<Piece>(8));
-  // assign 2d vector to grid
-  // grid = two_D_vector;
+void Board::create_board() {
 
   std::vector<std::vector<Piece> > two_D_vector(8);
 
+  RookPiece rook_three(0, 0, "white");
+  RookPiece rook_four(0, 7, "white");
+  KnightPiece knight_three(0, 1, "white");
+  KnightPiece knight_four(0, 6, "white");
+  BishopPiece bishop_three(0, 2, "white");
+  BishopPiece bishop_four(0, 5, "white");
+  KingPiece white_king(0, 3, "white");
+  QueenPiece white_queen(0, 4, "white");
+
+  std::vector<Piece> white_pieces = {rook_three, knight_three, bishop_three, white_queen, white_king, bishop_four, knight_four, rook_four};
+
+  RookPiece rook_one(0, 0, "black");
+  RookPiece rook_two(0, 7, "black");
+  KnightPiece knight_one(0, 1, "black");
+  KnightPiece knight_two(0, 6, "black");
+  BishopPiece bishop_one(0, 2, "black");
+  BishopPiece bishop_two(0, 5, "black");
+  KingPiece black_king(0, 3, "black");
+  QueenPiece black_queen(0, 4, "black");
+  
+
+  std::vector<Piece> black_pieces = {rook_one, knight_one, bishop_one, black_queen, black_king, bishop_two, knight_two, rook_two};
+
+
   for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      Piece empty_piece(i, j);
-      two_D_vector[i].push_back(empty_piece);
+    if (i == 0) two_D_vector[i] = black_pieces;
+    if (i == 7) two_D_vector[i] = white_pieces;
+
+    if (i == 1 ) {
+      for (int j = 0; j < 8; j++) {
+        PawnPiece pawn(i, j, "black");
+        two_D_vector[i].push_back(pawn);
+      } 
     }
+
+    if (i == 6) {
+      for (int j = 0; j < 8; j++) {
+        PawnPiece pawn(i, j, "white");
+        two_D_vector[i].push_back(pawn);
+      } 
+    }
+
+    if (i > 1 && i < 6) { 
+      for (int j = 0; j < 8; j++) { 
+        NullPiece null_piece(i, j);
+        two_D_vector[i].push_back(null_piece);
+      }
+    }  
   }
 
   grid = two_D_vector;
-}
-
-void Board::place_pieces() {
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      if (i > 1 && i < 6) {  
-        NullPiece null_piece(i, j);
-        grid[i][j] = null_piece;
-      }  
-    }
-  }
 }
 
 void Board::print_board() {

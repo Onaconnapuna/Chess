@@ -3,6 +3,12 @@
 #include <vector>
 #include "../pieces/piece.h"
 #include "../pieces/null_piece.h"
+#include "../pieces/rook.h"
+#include "../pieces/bishop.h"
+#include "../pieces/knight.h"
+#include "../pieces/queen.h"
+#include "../pieces/king.h"
+#include "../pieces/pawn.h"
 
 class Board {
 
@@ -11,7 +17,6 @@ class Board {
     std::vector<std::vector<Piece>> grid;
 
     void create_board();
-    void place_pieces();
     void print_board();
     bool move_piece(Board& board, int start_pos[2], int end_pos[2]);
 
