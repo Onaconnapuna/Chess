@@ -6,7 +6,7 @@ class PawnPiece : public Piece
 {
 
   public:
-  PawnPiece(int posX, int posY, std::string add_color);
+  PawnPiece(int posX, int posY, std::string add_color, std::string add_symbol);
 
 };
 

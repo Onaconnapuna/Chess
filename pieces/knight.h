@@ -6,7 +6,7 @@ class KnightPiece : public Piece
 {
 
   public:
-  KnightPiece(int posX, int posY, std::string add_color);
+  KnightPiece(int posX, int posY, std::string add_color, std::string add_symbol);
 
 };
 

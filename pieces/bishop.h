@@ -6,7 +6,7 @@ class BishopPiece : public Piece
 {
 
   public:
-  BishopPiece(int posX, int posY, std::string add_color);
+  BishopPiece(int posX, int posY, std::string add_color, std::string add_symbol);
 
 };
 

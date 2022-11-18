@@ -10,6 +10,7 @@ class Piece {
     bool slideable = false;
     std::string value = "placeholder";
     std::string color = "white/black";
+    std::string symbol;
     std::vector<int> position;
     std::vector<std::vector<int> > deltas;
 

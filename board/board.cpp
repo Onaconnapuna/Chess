@@ -7,25 +7,25 @@ void Board::create_board() {
 
   std::vector<std::vector<Piece> > two_D_vector(8);
 
-  RookPiece rook_three(7, 0, "white");
-  RookPiece rook_four(7, 7, "white");
-  KnightPiece knight_three(7, 1, "white");
-  KnightPiece knight_four(7, 6, "white");
-  BishopPiece bishop_three(7, 2, "white");
-  BishopPiece bishop_four(7, 5, "white");
-  KingPiece white_king(7, 3, "white");
-  QueenPiece white_queen(7, 4, "white");
+  RookPiece rook_three(7, 0, "white", "R");
+  RookPiece rook_four(7, 7, "white", "R");
+  KnightPiece knight_three(7, 1, "white", "N");
+  KnightPiece knight_four(7, 6, "white", "N");
+  BishopPiece bishop_three(7, 2, "white", "B");
+  BishopPiece bishop_four(7, 5, "white", "B");
+  KingPiece white_king(7, 3, "white", "K");
+  QueenPiece white_queen(7, 4, "white", "Q");
 
   std::vector<Piece> white_pieces = {rook_three, knight_three, bishop_three, white_queen, white_king, bishop_four, knight_four, rook_four};
 
-  RookPiece rook_one(0, 0, "black");
-  RookPiece rook_two(0, 7, "black");
-  KnightPiece knight_one(0, 1, "black");
-  KnightPiece knight_two(0, 6, "black");
-  BishopPiece bishop_one(0, 2, "black");
-  BishopPiece bishop_two(0, 5, "black");
-  KingPiece black_king(0, 3, "black");
-  QueenPiece black_queen(0, 4, "black");
+  RookPiece rook_one(0, 0, "black", "r");
+  RookPiece rook_two(0, 7, "black", "r");
+  KnightPiece knight_one(0, 1, "black", "n");
+  KnightPiece knight_two(0, 6, "black", "n");
+  BishopPiece bishop_one(0, 2, "black", "b");
+  BishopPiece bishop_two(0, 5, "black", "b");
+  KingPiece black_king(0, 3, "black", "k");
+  QueenPiece black_queen(0, 4, "black", "q");
   
 
   std::vector<Piece> black_pieces = {rook_one, knight_one, bishop_one, black_queen, black_king, bishop_two, knight_two, rook_two};
@@ -37,14 +37,14 @@ void Board::create_board() {
 
     if (i == 1 ) {
       for (int j = 0; j < 8; j++) {
-        PawnPiece pawn(i, j, "black");
+        PawnPiece pawn(i, j, "black", "p");
         two_D_vector[i].push_back(pawn);
       } 
     }
 
     if (i == 6) {
       for (int j = 0; j < 8; j++) {
-        PawnPiece pawn(i, j, "white");
+        PawnPiece pawn(i, j, "white", "P");
         two_D_vector[i].push_back(pawn);
       } 
     }
@@ -62,11 +62,18 @@ void Board::create_board() {
 
 void Board::print_board() {
   for (int i = 0; i < grid.size(); i++) {
+    std::cout << i;
     for (int j = 0; j < grid[i].size(); j++) {
-      std::cout << grid[i][j].position[0] << grid[i][j].position[1] << " ";
+      std::cout << " " << grid[i][j].symbol << " ";
     }
     std::cout << std::endl;
   }
+
+  std::cout << "  ";
+  for (int i = 0; i < 8; i++) {
+    std:: cout << i << "  ";
+  }
+  std::cout << std::endl;
 }
 
 bool Board::move_piece(Board& board, int start_pos[2], int end_pos[2]) {
