@@ -2,7 +2,6 @@
 #define _PIECE_
 #include <string>
 #include <vector>
-// #include "../board/board.h"
 class Board;
 
 class Piece {
@@ -19,6 +18,7 @@ class Piece {
     void add_value(std::string value);
     std::string get_value();
     std::vector<std::vector<int> > slideable_moves(Board& board);
+    std::vector<std::vector<int> > stepable_moves(Board& board);
 
 };
 
