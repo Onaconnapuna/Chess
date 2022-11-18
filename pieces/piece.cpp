@@ -29,7 +29,7 @@ std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
 
     int adj_x = x + board_x;
     int adj_y = y + board_y;
-
+    // std::cout << adj_x << adj_y << std::endl;
     valid_space = true;
     while (valid_space) {
       std::vector<int> adj_pos = { adj_x, adj_y }; 
@@ -43,24 +43,18 @@ std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
 
       if (board.grid[adj_x][adj_y].color == color) {
         valid_space = false;
-        break; 
-      }
-
-      //for testing
-
-      if (board.grid[adj_x][adj_y].color == "white/black") {
+        break;
+      } else if (board.grid[adj_x][adj_y].color == "null_color") {
         moves.push_back(adj_pos);
-      }
+      } else if (board.grid[adj_x][adj_y].color == "black") {
+        moves.push_back(adj_pos);
+        valid_space = false;
+        break;
+      } 
 
-      // if (board.grid[adj_x][adj_y].color != color) {
-      //   moves.push_back(adj_pos);
-      //   break;
-      // } 
-
-      moves.push_back(adj_pos);
+      // moves.push_back(adj_pos);
       adj_x += x;
       adj_y += y;
-      // std::cout << adj_x << adj_y << std::endl;
     } 
   }
 

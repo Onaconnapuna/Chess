@@ -7,14 +7,14 @@ void Board::create_board() {
 
   std::vector<std::vector<Piece> > two_D_vector(8);
 
-  RookPiece rook_three(0, 0, "white");
-  RookPiece rook_four(0, 7, "white");
-  KnightPiece knight_three(0, 1, "white");
-  KnightPiece knight_four(0, 6, "white");
-  BishopPiece bishop_three(0, 2, "white");
-  BishopPiece bishop_four(0, 5, "white");
-  KingPiece white_king(0, 3, "white");
-  QueenPiece white_queen(0, 4, "white");
+  RookPiece rook_three(7, 0, "white");
+  RookPiece rook_four(7, 7, "white");
+  KnightPiece knight_three(7, 1, "white");
+  KnightPiece knight_four(7, 6, "white");
+  BishopPiece bishop_three(7, 2, "white");
+  BishopPiece bishop_four(7, 5, "white");
+  KingPiece white_king(7, 3, "white");
+  QueenPiece white_queen(7, 4, "white");
 
   std::vector<Piece> white_pieces = {rook_three, knight_three, bishop_three, white_queen, white_king, bishop_four, knight_four, rook_four};
 
@@ -63,7 +63,7 @@ void Board::create_board() {
 void Board::print_board() {
   for (int i = 0; i < grid.size(); i++) {
     for (int j = 0; j < grid[i].size(); j++) {
-      std::cout << grid[i][j].value << " ";
+      std::cout << grid[i][j].position[0] << grid[i][j].position[1] << " ";
     }
     std::cout << std::endl;
   }

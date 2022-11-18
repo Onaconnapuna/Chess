@@ -5,5 +5,5 @@ RookPiece::RookPiece(int posX, int posY, std::string add_color) : Piece(posX, po
   value = "rook";
   slideable = true;
   color = add_color;
-  deltas = { {-1, 0}, {0, 1}, {1, 0}, {-1, 0} };
+  deltas = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} };
 }
