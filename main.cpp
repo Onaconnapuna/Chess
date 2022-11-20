@@ -17,7 +17,12 @@ int main() {
   // int end_pos[] = {3, 3};
   // board.move_piece(board, start_pos, end_pos);
   board.print_board();
+
+  int pos_one[2] = { 0, 0 };
+  int pos_two[2] = { 3, 3 };
   
+  board.move_piece(pos_one, pos_two);
+  board.print_board();
   // QueenPiece rook(3,3, "white");
   // board.grid[3][3] = rook;
 

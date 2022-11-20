@@ -18,7 +18,8 @@ class Board {
 
     void create_board();
     void print_board();
-    bool move_piece(Board& board, int start_pos[2], int end_pos[2]);
+    bool move_piece(int start_pos[2], int end_pos[2]);
+    bool in_check(Piece& king);
 
 };
 

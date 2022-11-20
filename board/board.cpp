@@ -76,21 +76,31 @@ void Board::print_board() {
   std::cout << std::endl;
 }
 
-bool Board::move_piece(Board& board, int start_pos[2], int end_pos[2]) {
+bool Board::move_piece(int start_pos[2], int end_pos[2]) {
   int start_x = start_pos[0];
   int start_y = start_pos[1];
 
-  if (board.grid[start_x][start_y].value == "empty_space") return false;
+  if (grid[start_x][start_y].value == "empty_space") return false;
 
   int end_x = end_pos[0];
   int end_y = end_pos[1];
 
-  if (board.grid[end_x][end_y].value == "placeholder") return false;
+  if (grid[end_x][end_y].value == "placeholder") return false;
 
-  board.grid[end_x][end_y] = board.grid[start_x][start_y];
+  grid[end_x][end_y] = grid[start_x][start_y];
 
   NullPiece null_piece(start_x, start_y);
 
-  board.grid[start_x][start_y] = null_piece;
+  grid[start_x][start_y] = null_piece;
   return true;
+}
+
+bool Board::in_check(Piece& king) {
+
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+
+    }
+  }
+
 }
