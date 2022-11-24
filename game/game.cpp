@@ -1,6 +1,10 @@
+#include <iostream>
 #include "game.h"
-#include "../board/board.h"
 
 Game::Game() {
   
+}
+
+void Game::start_match(Board& board) {
+
 }
