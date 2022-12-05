@@ -9,6 +9,7 @@
 #include "../pieces/queen.h"
 #include "../pieces/king.h"
 #include "../pieces/pawn.h"
+class Piece;
 
 class Board {
 
@@ -16,13 +17,13 @@ class Board {
 
     std::vector<std::vector<Piece>> grid;
     std::vector<Piece> white_pieces;
-    std::vector<Piece>black_pieces;
+    std::vector<Piece> black_pieces;
 
     Board();
-    
+
     void print_board();
     bool move_piece(Piece& piece, int end_pos[2]);
-    bool in_check(Piece& king);
+    bool in_check(KingPiece& king);
 
 };
 

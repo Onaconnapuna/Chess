@@ -134,13 +134,26 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
   return true;
 }
 
-bool Board::in_check(Piece& king) {
+bool Board::in_check(KingPiece& king) {
   std::string color = king.color;
+  std::vector<std::vector<int>> valid_moves;
 
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      
+  if (color == "white") {
+    for (int i = 0; i < black_pieces.size(); i++) {
+      valid_moves = black_pieces[i].valid_moves(*this);
+      for (int i = 0; i < valid_moves.size(); i++) {
+        if (valid_moves[i][0] == king.position[0] && valid_moves[i][1] == king.position[1]) return true;
+      }
+      valid_moves.clear();
+    }
+  } else {
+    for (int i = 0; i < white_pieces.size(); i++) {
+      valid_moves = white_pieces[i].valid_moves(*this);
+      for (int i = 0; i < valid_moves.size(); i++) {
+        if (valid_moves[i][0] == king.position[0] && valid_moves[i][1] == king.position[1]) return true;
+      }
+      valid_moves.clear();
     }
   }
-
+  return true;
 }

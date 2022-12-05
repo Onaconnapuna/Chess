@@ -5,6 +5,7 @@
 #include "./pieces/piece.h"
 #include "./game/game.h"
 #include "./pieces/knight.h"
+#include "./pieces/king.h"
 // #include "./pieces/rook.h"
 // class RookPiece;
 // class QueenPiece;
@@ -22,15 +23,22 @@ int main() {
   int end_pos[2] = { 0, 1 };
   game.board.move_piece(game.board.grid[0][0], end_pos);
 
+
+
+  std::cout << game.board.in_check(game.board.grid[0][4]);
+  // std::cout << game.board.grid[0][4].in_check(game.board);
+  // std::cout << game.board.grid[0][4].value;
+
   // game.board.print_board();
 
-  for (int i = 0; i < game.board.black_pieces.size(); i++) {
-    int start_pos = game.board.black_pieces[i].position[0];
-    int end_pos = game.board.black_pieces[i].position[1];
-    std::cout << start_pos << end_pos << std::endl;
-  }
-game.board.print_board();
+//   for (int i = 0; i < game.board.black_pieces.size(); i++) {
+//     int start_pos = game.board.black_pieces[i].position[0];
+//     int end_pos = game.board.black_pieces[i].position[1];
+//     std::cout << start_pos << end_pos << std::endl;
+//   }
+// game.board.print_board();
 
+  
 
   // std::vector<std::vector<int> > moves = knight.valid_moves(game.board);
   // std::cout << moves.size();
