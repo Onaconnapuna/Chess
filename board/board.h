@@ -15,10 +15,13 @@ class Board {
   public: 
 
     std::vector<std::vector<Piece>> grid;
+    std::vector<Piece> white_pieces;
+    std::vector<Piece>black_pieces;
 
-    void create_board();
+    Board();
+    
     void print_board();
-    bool move_piece(int start_pos[2], int end_pos[2]);
+    bool move_piece(Piece& piece, int end_pos[2]);
     bool in_check(Piece& king);
 
 };

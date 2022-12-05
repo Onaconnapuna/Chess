@@ -80,3 +80,16 @@ std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
   return moves;
 }
 
+std::vector<std::vector<int>> Piece::valid_moves(Board& board) { 
+  
+  std::vector<std::vector<int> > moves;
+
+  if (slideable == true) {
+    moves = slideable_moves(board);
+  } else {
+    moves = stepable_moves(board);
+  }
+
+  return moves;
+
+}
