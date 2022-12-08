@@ -24,6 +24,7 @@ class Board {
     void print_board();
     bool move_piece(Piece& piece, int end_pos[2]);
     bool in_check(Piece& king);
+    bool checkmate(Piece& king);
 
 };
 
