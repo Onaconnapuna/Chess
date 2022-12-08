@@ -94,7 +94,6 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
 
   piece.position[0] = end_x;
   piece.position[1] = end_y;
-  piece.symbol = "H";
 
   grid[end_x][end_y] = piece;
 
@@ -129,8 +128,6 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
         } 
       } 
     } 
-
-  // std::cout << piece.symbol;
 
   NullPiece null_piece(start_x, start_y);
 
