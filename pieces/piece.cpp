@@ -17,7 +17,7 @@ std::string Piece::get_value() {
   return value;
 }
 
-std::vector<std::vector<int>> Piece::stepable_moves(Board& board) {
+std::vector<std::vector<int>> Piece::stepable_moves(const Board& board) {
 
   std::vector<std::vector<int> > moves;
   for (int i = 0; i < deltas.size(); i++) {
@@ -29,17 +29,19 @@ std::vector<std::vector<int>> Piece::stepable_moves(Board& board) {
 
     int adj_x = x + board_x;
     int adj_y = y + board_y;
+    bool inboundsX = 0 <= adj_x && adj_x < 8;
+    bool inboundsY = 0 <= adj_y && adj_y < 8;
 
     std::vector<int> adj_pos = { adj_x, adj_y };
 
-    if (board.grid[adj_x][adj_y].color == "null_color" || board.grid[adj_x][adj_y].color != color) {
+    if ((inboundsX && inboundsY) && board.grid[adj_x][adj_y].color == "null_color" || board.grid[adj_x][adj_y].color != color) {
       moves.push_back(adj_pos);
     }
   }
   return moves;
 }
 
-std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
+std::vector<std::vector<int>> Piece::slideable_moves(const Board& board) {
   
   std::vector<std::vector<int> > moves;
   bool valid_space = false;
@@ -80,7 +82,7 @@ std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
   return moves;
 }
 
-std::vector<std::vector<int>> Piece::valid_moves(Board& board) { 
+std::vector<std::vector<int>> Piece::valid_moves(const Board& board) { 
   
   std::vector<std::vector<int> > moves;
 

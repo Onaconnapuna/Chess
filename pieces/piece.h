@@ -18,11 +18,11 @@ class Piece {
 
     void add_value(std::string value);
     std::string get_value();
-    std::vector<std::vector<int> > valid_moves(Board& board);
-
-    private:
-    std::vector<std::vector<int> > slideable_moves(Board& board);
-    std::vector<std::vector<int> > stepable_moves(Board& board);
+    std::vector<std::vector<int> > valid_moves(const Board& board);
+    
+  private:
+    std::vector<std::vector<int> > slideable_moves(const Board& board);
+    std::vector<std::vector<int> > stepable_moves(const Board& board);
 
 };
 

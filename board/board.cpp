@@ -12,8 +12,8 @@ Board::Board() {
   KnightPiece knight_four(7, 6, "white", "N");
   BishopPiece bishop_three(7, 2, "white", "B");
   BishopPiece bishop_four(7, 5, "white", "B");
-  KingPiece white_king(7, 3, "white", "K");
-  QueenPiece white_queen(7, 4, "white", "Q");
+  KingPiece white_king(7, 4, "white", "K");
+  QueenPiece white_queen(7, 3, "white", "Q");
 
   white_pieces = {rook_three, knight_three, bishop_three, white_queen, white_king, bishop_four, knight_four, rook_four};
 
@@ -23,8 +23,8 @@ Board::Board() {
   KnightPiece knight_two(0, 6, "black", "n");
   BishopPiece bishop_one(0, 2, "black", "b");
   BishopPiece bishop_two(0, 5, "black", "b");
-  KingPiece black_king(0, 3, "black", "k");
-  QueenPiece black_queen(0, 4, "black", "q");
+  KingPiece black_king(0, 4, "black", "k");
+  QueenPiece black_queen(0, 3, "black", "q");
   
 
   black_pieces = {rook_one, knight_one, bishop_one, black_queen, black_king, bishop_two, knight_two, rook_two};
@@ -61,6 +61,7 @@ Board::Board() {
 
 
 void Board::print_board() {
+  std::vector<std::string> alpha = { "A", "B", "C", "D", "E", "F", "G", "H" };
   for (int i = 0; i < grid.size(); i++) {
     std::cout << i;
     for (int j = 0; j < grid[i].size(); j++) {
@@ -71,7 +72,7 @@ void Board::print_board() {
 
   std::cout << "  ";
   for (int i = 0; i < 8; i++) {
-    std:: cout << i << "  ";
+    std:: cout << alpha[i] << "  ";
   }
   std::cout << std::endl;
 }
@@ -91,16 +92,21 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
   if (grid[end_x][end_y].value == "placeholder") return false;
   if (grid[end_x][end_y].color == color) return false;
 
+  piece.position[0] = end_x;
+  piece.position[1] = end_y;
+  piece.symbol = "H";
 
   grid[end_x][end_y] = piece;
 
-  if (color == "white") {
+  if (color == "white") { 
+    // changing the position of the piece within the white pieces array
     for (int i = 0; i < white_pieces.size(); i++) {
       if (white_pieces[i].position[0] == start_x && white_pieces[i].position[1] == start_y) { 
         white_pieces[i].position[0] = end_x;
         white_pieces[i].position[1] = end_y;
       }
       if (end_color == "black") {
+        // if end pos was opposite piece, deleting piece from the opposite color pieces array
         for (int i = 0; i < black_pieces.size(); i++) {
           if (black_pieces[i].position[0] == end_x && black_pieces[i].position[1] == end_y) {
             black_pieces.erase(black_pieces.begin() + i);
@@ -124,9 +130,7 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
       } 
     } 
 
-
-  piece.position[0] = end_x;
-  piece.position[1] = end_y;
+  // std::cout << piece.symbol;
 
   NullPiece null_piece(start_x, start_y);
 
@@ -134,26 +138,46 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
   return true;
 }
 
-bool Board::in_check(KingPiece& king) {
+bool Board::in_check(Piece& king) {
   std::string color = king.color;
   std::vector<std::vector<int>> valid_moves;
 
   if (color == "white") {
-    for (int i = 0; i < black_pieces.size(); i++) {
-      valid_moves = black_pieces[i].valid_moves(*this);
-      for (int i = 0; i < valid_moves.size(); i++) {
+    for (int i = 0; i < this->black_pieces.size(); i++) {
+      // std::cout << this->black_pieces[i].value << std::endl;
+      if (this->black_pieces[i].slideable == true) {
+      valid_moves = this->black_pieces[i].valid_moves(*this);
+
+      }
+
+      // for (int i = 0; i < valid_moves.size(); i++) {
+      //   std::cout << valid_moves[i][0] << valid_moves[i][1] << std::endl;
+      // }
+       for (int i = 0; i < valid_moves.size(); i++) {
         if (valid_moves[i][0] == king.position[0] && valid_moves[i][1] == king.position[1]) return true;
       }
-      valid_moves.clear();
+
+      // for (int i = 0; i < valid_moves.size(); i++) {
+      //   if (valid_moves[i][0] == king.position[0] && valid_moves[i][1] == king.position[1]) return true;
+      // }
+      // valid_moves.clear();
     }
   } else {
-    for (int i = 0; i < white_pieces.size(); i++) {
-      valid_moves = white_pieces[i].valid_moves(*this);
+    for (int i = 0; i < this->white_pieces.size(); i++) {
+      // std::cout << white_pieces[i].value << std::endl;
+      if (this->black_pieces[i].slideable == true) {
+      valid_moves = this->white_pieces[i].valid_moves(*this);
+      }
+
+      // for (int i = 0; i < valid_moves.size(); i++) {
+      //   std::cout << valid_moves[i][0] << valid_moves[i][1] << std::endl;
+      // }
       for (int i = 0; i < valid_moves.size(); i++) {
         if (valid_moves[i][0] == king.position[0] && valid_moves[i][1] == king.position[1]) return true;
       }
-      valid_moves.clear();
+      // valid_moves.clear();
     }
   }
-  return true;
+
+  return false;
 }

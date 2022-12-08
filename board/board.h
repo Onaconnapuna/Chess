@@ -23,7 +23,7 @@ class Board {
 
     void print_board();
     bool move_piece(Piece& piece, int end_pos[2]);
-    bool in_check(KingPiece& king);
+    bool in_check(Piece& king);
 
 };
 
