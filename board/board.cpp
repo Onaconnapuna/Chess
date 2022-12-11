@@ -168,22 +168,35 @@ bool Board::in_check(Piece& king) {
 }
 
 bool Board::checkmate(Piece& king) {
+  // find all valid moves for the king
+  // if there are no valid squares, 
+  // somehow find a way to see if any of same color pieces can block,
+  // if thats not possible, return true;
   std::string color = king.color;
   std::vector<std::vector<int>> king_moves;
   king_moves = king.valid_moves(*this);
+  // for (int i = 0; i < king_moves.size(); i++) {
+  //     std::cout << king_moves[i][0] << king_moves[i][1] << std::endl;
+  // }
 
   std::vector<std::vector<int>> invalid_squares;
+  std::vector<int> pos = { 5, 5 };
+  invalid_squares.push_back(pos);
+  std::vector<std::vector<int>> moves;
 
-  for (int i = 0; i < king_moves.size(); i++) {
-    std::cout << king_moves[i][0] << king_moves[i][1] << std::endl;
-  }
-  // bool checkmate = false;
   if (color == "white") {
     // iterate over the black pieces vector 
     for (int i = 0; i < this->black_pieces.size(); i++) {
-      std::vector<std::vector<int>> moves = this->black_pieces[i].valid_moves(*this);
+      if (this->black_pieces[i].slideable == true) {
+        moves = this->black_pieces[i].slideable_squares(*this);
+      } else { 
+        moves = this->black_pieces[i].valid_moves(*this);
+      }
       // adding all valid moves from blacks pieces to invalid squares for white
       invalid_squares.insert(std::end(invalid_squares), std::begin(moves), std::end(moves));
+    }
+    for (int i = 0; i < invalid_squares.size(); i++) {
+      std::cout << invalid_squares[i][0] << invalid_squares[i][1] << std::endl;
     }
     // now iterate over kings moves to see if all moves are included in invalid squares
     for (int i = 0; i < king_moves.size(); i++) {
@@ -195,7 +208,11 @@ bool Board::checkmate(Piece& king) {
       return true;
   } else {
     for (int i = 0; i < this->white_pieces.size(); i++) {
-      std::vector<std::vector<int>> moves = this->white_pieces[i].valid_moves(*this);
+      if (this->white_pieces[i].slideable == true) {
+        moves = this->white_pieces[i].slideable_squares(*this);
+      } else {
+        moves = this->white_pieces[i].valid_moves(*this);
+      }
       // adding all valid moves from white pieces to invalid squares for white
       invalid_squares.insert(std::end(invalid_squares), std::begin(moves), std::end(moves));
     }

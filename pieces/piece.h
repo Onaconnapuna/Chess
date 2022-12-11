@@ -19,6 +19,7 @@ class Piece {
     void add_value(std::string value);
     std::string get_value();
     std::vector<std::vector<int> > valid_moves(const Board& board);
+    std::vector<std::vector<int> > slideable_squares(const Board& board);
     
   private:
 
