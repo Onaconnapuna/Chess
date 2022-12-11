@@ -21,6 +21,7 @@ class Piece {
     std::vector<std::vector<int> > valid_moves(const Board& board);
     
   private:
+
     std::vector<std::vector<int> > slideable_moves(const Board& board);
     std::vector<std::vector<int> > stepable_moves(const Board& board);
 

@@ -13,7 +13,7 @@ Board::Board() {
   KnightPiece knight_four(7, 6, "white", "N");
   BishopPiece bishop_three(7, 2, "white", "B");
   BishopPiece bishop_four(7, 5, "white", "B");
-  KingPiece white_king(7, 4, "white", "K");
+  KingPiece white_king(7, 4, "white", "K"); 
   QueenPiece white_queen(7, 3, "white", "Q");
 
   white_pieces = {rook_three, knight_three, bishop_three, white_queen, white_king, bishop_four, knight_four, rook_four};
@@ -63,8 +63,9 @@ Board::Board() {
 
 void Board::print_board() {
   std::vector<std::string> alpha = { "A", "B", "C", "D", "E", "F", "G", "H" };
+  std::vector<int> nums = { 8, 7, 6, 5, 4, 3, 2, 1};
   for (int i = 0; i < grid.size(); i++) {
-    std::cout << i;
+    std::cout << nums[i];
     for (int j = 0; j < grid[i].size(); j++) {
       std::cout << " " << grid[i][j].symbol << " ";
     }
@@ -168,8 +169,14 @@ bool Board::in_check(Piece& king) {
 
 bool Board::checkmate(Piece& king) {
   std::string color = king.color;
-  std::vector<std::vector<int>> king_moves = king.valid_moves(*this);
+  std::vector<std::vector<int>> king_moves;
+  king_moves = king.valid_moves(*this);
+
   std::vector<std::vector<int>> invalid_squares;
+
+  for (int i = 0; i < king_moves.size(); i++) {
+    std::cout << king_moves[i][0] << king_moves[i][1] << std::endl;
+  }
   // bool checkmate = false;
   if (color == "white") {
     // iterate over the black pieces vector 
