@@ -152,9 +152,9 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
       // get all valid moves
       std::vector<std::vector<int>> moves = board.white_pieces[i].valid_moves(board);
       // iterate over those moves to find any that take the king out of check
-      for (int i = 0; i < moves.size(); i++) {
-        int new_posX = moves[i][0];
-        int new_posY = moves[i][1];
+      for (int j = 0; j < moves.size(); j++) {
+        int new_posX = moves[j][0];
+        int new_posY = moves[j][1];
         std::vector<int> pos = { new_posX, new_posY };
         int pos_arr[2] = { new_posX, new_posY };
         board.move_piece(board.white_pieces[i], pos_arr);
@@ -163,7 +163,7 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
         }
       }
       board.move_piece(board.white_pieces[i], start_pos);
-    } return valid_moves_from_check;
+    } 
   } else {
       for (int i = 0; i < board.black_pieces.size(); i++) {
       int startX = board.black_pieces[i].position[0];
@@ -172,9 +172,9 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
       // get all valid moves
       std::vector<std::vector<int>> moves = board.black_pieces[i].valid_moves(board);
       // iterate over those moves to find any that take the king out of check
-      for (int i = 0; i < moves.size(); i++) {
-        int new_posX = moves[i][0];
-        int new_posY = moves[i][1];
+      for (int j = 0; j < moves.size(); j++) {
+        int new_posX = moves[j][0];
+        int new_posY = moves[j][1];
         std::vector<int> pos = { new_posX, new_posY };
         int pos_arr[2] = { new_posX, new_posY };
         board.move_piece(board.black_pieces[i], pos_arr);
@@ -183,8 +183,9 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
         }
       }
       board.move_piece(board.black_pieces[i], start_pos);
-    } return valid_moves_from_check;
+    } 
   }
+  return valid_moves_from_check;
 }
 
 

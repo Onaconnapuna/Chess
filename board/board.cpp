@@ -90,9 +90,9 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
   int end_x = end_pos[0];
   int end_y = end_pos[1];
 
-  bool inboundsX = 0 <= end_x && end_x < 8;
-  bool inboundsY = 0 <= end_y && end_y < 8;
-  if (!inboundsX || !inboundsY) return false; 
+  // bool inboundsX = 0 <= end_x && end_x < 8;
+  // bool inboundsY = 0 <= end_y && end_y < 8;
+  // if (!inboundsX || !inboundsY) return false; 
 
   std::string end_color = grid[end_x][end_y].color;
 
@@ -147,10 +147,10 @@ bool Board::in_check(Piece& king) {
   std::vector<std::vector<int>> valid_moves;
 
   if (color == "white") {
-    for (int i = 0; i < this->black_pieces.size(); i++) {
+    for (int i = 0; i < black_pieces.size(); i++) {
 
-      if (this->black_pieces[i].slideable == true) {
-        valid_moves = this->black_pieces[i].valid_moves(*this);
+      if (black_pieces[i].slideable == true) {
+        valid_moves = black_pieces[i].valid_moves(*this);
       }
        for (int i = 0; i < valid_moves.size(); i++) {
         if (valid_moves[i][0] == king.position[0] && valid_moves[i][1] == king.position[1]) return true;
@@ -158,9 +158,9 @@ bool Board::in_check(Piece& king) {
       valid_moves.clear();
     }
   } else {
-    for (int i = 0; i < this->white_pieces.size(); i++) {
-      if (this->black_pieces[i].slideable == true) {
-      valid_moves = this->white_pieces[i].valid_moves(*this);
+    for (int i = 0; i < white_pieces.size(); i++) {
+      if (black_pieces[i].slideable == true) {
+      valid_moves = white_pieces[i].valid_moves(*this);
       }
       for (int i = 0; i < valid_moves.size(); i++) {
         if (valid_moves[i][0] == king.position[0] && valid_moves[i][1] == king.position[1]) return true;
@@ -192,11 +192,11 @@ bool Board::checkmate(Piece& king) {
 
   if (color == "white") {
     // iterate over the black pieces vector 
-    for (int i = 0; i < this->black_pieces.size(); i++) {
-      if (this->black_pieces[i].slideable == true) {
-        moves = this->black_pieces[i].slideable_squares(*this);
+    for (int i = 0; i < black_pieces.size(); i++) {
+      if (black_pieces[i].slideable == true) {
+        moves = black_pieces[i].slideable_squares(*this);
       } else { 
-        moves = this->black_pieces[i].valid_moves(*this);
+        moves = black_pieces[i].valid_moves(*this);
       }
       // adding all valid moves from blacks pieces to invalid squares for white
       invalid_squares.insert(std::end(invalid_squares), std::begin(moves), std::end(moves));
@@ -212,11 +212,11 @@ bool Board::checkmate(Piece& king) {
       } 
     }
   } else {
-    for (int i = 0; i < this->white_pieces.size(); i++) {
-      if (this->white_pieces[i].slideable == true) {
-        moves = this->white_pieces[i].slideable_squares(*this);
+    for (int i = 0; i < white_pieces.size(); i++) {
+      if (white_pieces[i].slideable == true) {
+        moves = white_pieces[i].slideable_squares(*this);
       } else {
-        moves = this->white_pieces[i].valid_moves(*this);
+        moves = white_pieces[i].valid_moves(*this);
       }
       // adding all valid moves from white pieces to invalid squares for white
       invalid_squares.insert(std::end(invalid_squares), std::begin(moves), std::end(moves));
@@ -229,8 +229,12 @@ bool Board::checkmate(Piece& king) {
       } 
     }
     std::vector<std::vector<int>> blocking_moves = king.moves_out_of_check(*this);
-    if (blocking_moves.size() == 0 ) {
-      std::cout << "false";
+
+    // if (blocking_moves.size() == 0 ) {
+    //   std::cout << "false";
+    // }
+    for (int k = 0; k < blocking_moves.size(); k++) {
+      std::cout << blocking_moves[k][0] << blocking_moves[k][1] << std::endl;
     }
     if (zero_moves == true && blocking_moves.size() == 0) {
       return true;
@@ -238,5 +242,5 @@ bool Board::checkmate(Piece& king) {
       return false;
     }
   }
-  return false;
+  // return false;
 } 
