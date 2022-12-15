@@ -20,7 +20,8 @@ class Board {
     std::vector<Piece> black_pieces;
 
     Board();
-
+    // Board(const Board& rhs);
+    // Board& operator=(const Board& rhs);
     void print_board();
     bool move_piece(Piece& piece, int end_pos[2]);
     bool in_check(Piece& king);

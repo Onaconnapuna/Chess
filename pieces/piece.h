@@ -18,13 +18,15 @@ class Piece {
 
     void add_value(std::string value);
     std::string get_value();
-    std::vector<std::vector<int> > valid_moves(const Board& board);
-    std::vector<std::vector<int> > slideable_squares(const Board& board);
-    
+    std::vector<std::vector<int> > valid_moves(Board& board);
+    std::vector<std::vector<int> > slideable_squares(Board& board);
+    std::vector<std::vector<int>> moves_out_of_check(Board& board);  
+    // function that iterates over pieces array to get all the moves that would 
+    // take the piece out of check.
   private:
 
-    std::vector<std::vector<int> > slideable_moves(const Board& board);
-    std::vector<std::vector<int> > stepable_moves(const Board& board);
+    std::vector<std::vector<int> > slideable_moves(Board& board);
+    std::vector<std::vector<int> > stepable_moves(Board& board);
 
 };
 

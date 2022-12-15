@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include "board.h" 
-using namespace std;
 
 Board::Board() {
   std::vector<std::vector<Piece> > two_D_vector(8);
@@ -59,6 +58,8 @@ Board::Board() {
 
   grid = two_D_vector;
 }
+
+
 
 
 void Board::print_board() {
@@ -166,6 +167,7 @@ bool Board::in_check(Piece& king) {
 
   return false;
 }
+
 
 bool Board::checkmate(Piece& king) {
   // find all valid moves for the king
