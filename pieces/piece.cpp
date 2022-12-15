@@ -139,18 +139,22 @@ std::vector<std::vector<int>> Piece::valid_moves(Board& board) {
 
 std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board) 
 {
-  int king_startX, king_startY = position[0], position[1];
+  int king_startX = position[0];
+  int king_startY = position[1];
   std::vector<std::vector<int>> valid_moves_from_check;
   if (color == "white") {
     // iterate over pieces
     for (int i = 0; i < board.white_pieces.size(); i++){
       int startX = board.white_pieces[i].position[0];
       int startY = board.white_pieces[i].position[1];
+      int start_pos[2] = { startX, startY };
+      // std::cout << startX << startY << std::endl;
       // get all valid moves
       std::vector<std::vector<int>> moves = board.white_pieces[i].valid_moves(board);
       // iterate over those moves to find any that take the king out of check
       for (int i = 0; i < moves.size(); i++) {
-        int new_posX, new_posY = moves[i][0], moves[i][1];
+        int new_posX = moves[i][0];
+        int new_posY = moves[i][1];
         std::vector<int> pos = { new_posX, new_posY };
         int pos_arr[2] = { new_posX, new_posY };
         board.move_piece(board.white_pieces[i], pos_arr);
@@ -158,16 +162,19 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
           valid_moves_from_check.push_back(pos);
         }
       }
+      board.move_piece(board.white_pieces[i], start_pos);
     } return valid_moves_from_check;
   } else {
-      for (int i = 0; i < board.black_pieces.size(); i++){
+      for (int i = 0; i < board.black_pieces.size(); i++) {
       int startX = board.black_pieces[i].position[0];
       int startY = board.black_pieces[i].position[1];
+      int start_pos[2] = { startX, startY };
       // get all valid moves
       std::vector<std::vector<int>> moves = board.black_pieces[i].valid_moves(board);
       // iterate over those moves to find any that take the king out of check
       for (int i = 0; i < moves.size(); i++) {
-        int new_posX, new_posY = moves[i][0], moves[i][1];
+        int new_posX = moves[i][0];
+        int new_posY = moves[i][1];
         std::vector<int> pos = { new_posX, new_posY };
         int pos_arr[2] = { new_posX, new_posY };
         board.move_piece(board.black_pieces[i], pos_arr);
@@ -175,6 +182,7 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
           valid_moves_from_check.push_back(pos);
         }
       }
+      board.move_piece(board.black_pieces[i], start_pos);
     } return valid_moves_from_check;
   }
 }

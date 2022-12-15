@@ -16,20 +16,20 @@ int main() {
 
   Game game;
 
-  int endposking[2] = { 4, 5 };
+  int endposking[2] = { 5 , 5 };
   game.board.move_piece(game.board.grid[7][4], endposking);
 
   int endposrook[2] = {2, 5};
   game.board.move_piece(game.board.grid[0][0], endposrook);
 
-  bool check = game.board.in_check(game.board.grid[4][5]);
-  std::cout << check << std::endl;
+  // bool check = game.board.in_check(game.board.grid[4][5]);
+  // std::cout << check << std::endl;
 
   int pos2[2] = { 2, 6 };
   int pos3[2] = { 2, 4};
   
   game.board.move_piece(game.board.grid[0][3], pos2);
-  // game.board.move_piece(game.board.grid[0][7], pos3);
+  game.board.move_piece(game.board.grid[0][7], pos3);
 
   game.board.print_board();
   

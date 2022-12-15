@@ -90,6 +90,10 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
   int end_x = end_pos[0];
   int end_y = end_pos[1];
 
+  bool inboundsX = 0 <= end_x && end_x < 8;
+  bool inboundsY = 0 <= end_y && end_y < 8;
+  if (!inboundsX || !inboundsY) return false; 
+
   std::string end_color = grid[end_x][end_y].color;
 
   if (grid[end_x][end_y].value == "placeholder") return false;
@@ -180,7 +184,7 @@ bool Board::checkmate(Piece& king) {
   // for (int i = 0; i < king_moves.size(); i++) {
   //     std::cout << king_moves[i][0] << king_moves[i][1] << std::endl;
   // }
-
+  bool zero_moves = false;
   std::vector<std::vector<int>> invalid_squares;
   std::vector<int> pos = { 5, 5 };
   invalid_squares.push_back(pos);
@@ -197,17 +201,16 @@ bool Board::checkmate(Piece& king) {
       // adding all valid moves from blacks pieces to invalid squares for white
       invalid_squares.insert(std::end(invalid_squares), std::begin(moves), std::end(moves));
     }
-    for (int i = 0; i < invalid_squares.size(); i++) {
-      std::cout << invalid_squares[i][0] << invalid_squares[i][1] << std::endl;
-    }
+    // for (int i = 0; i < invalid_squares.size(); i++) {
+    //   std::cout << invalid_squares[i][0] << invalid_squares[i][1] << std::endl;
+    // }
     // now iterate over kings moves to see if all moves are included in invalid squares
     for (int i = 0; i < king_moves.size(); i++) {
       // if any move of kings is not included in invalid squares, king must not be in checkmate 
       if (std::find(invalid_squares.begin(), invalid_squares.end(), king_moves[i]) == invalid_squares.end() ) {
-        return false;
+        zero_moves = true;
       } 
     }
-      return true;
   } else {
     for (int i = 0; i < this->white_pieces.size(); i++) {
       if (this->white_pieces[i].slideable == true) {
@@ -222,9 +225,18 @@ bool Board::checkmate(Piece& king) {
     for (int i = 0; i < king_moves.size(); i++) {
       // if any move of kings is not included in invalid squares, king must not be in checkmate 
       if (std::find(invalid_squares.begin(), invalid_squares.end(), king_moves[i]) == invalid_squares.end() ) {
-        return false;
+        zero_moves = true;
       } 
     }
-    return true;
+    std::vector<std::vector<int>> blocking_moves = king.moves_out_of_check(*this);
+    if (blocking_moves.size() == 0 ) {
+      std::cout << "false";
+    }
+    if (zero_moves == true && blocking_moves.size() == 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
+  return false;
 } 
