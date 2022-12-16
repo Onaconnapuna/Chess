@@ -255,8 +255,8 @@ bool Board::checkmate(Piece& king) {
   // for (int k = 0; k < blocking_moves.size(); k++) {
   //     std::cout << blocking_moves[k][0] << blocking_moves[k][1] << std::endl;
   //   }
-  std::cout << escape_moves.size() << std::endl;
-  std::cout << blocking_moves.size() << std::endl;
+  // std::cout << escape_moves.size() << std::endl;
+  // std::cout << blocking_moves.size() << std::endl;
    
    if (escape_moves.size() == 0 && blocking_moves.size() == 0) {
       return true;

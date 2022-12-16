@@ -141,16 +141,27 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
 {
   Board board_copy(board);
   board_copy.print_board();
-  // int king_startX = position[0];
-  // int king_startY = position[1];
+  int king_startX = position[0];
+  int king_startY = position[1];
   std::vector<std::vector<int>> valid_moves_from_check;
   if (color == "white") {
     // iterate over pieces
-    for (int i = 0; i < board_copy.white_pieces.size(); i++) {
-      std::cout <<  board_copy.white_pieces[i].symbol;
-      int startX = board_copy.white_pieces[i].position[0];
-      int startY = board_copy.white_pieces[i].position[1];
-      int start_pos[2] = { startX, startY };
+    for (int i = 0; i < board.white_pieces.size(); i++) {
+      Board board_copy(board);
+      std::vector<std::vector<int>> moves = board_copy.white_pieces[i].valid_moves(board_copy);
+      for (int j = 0; j < moves.size(); j++) {
+        int new_posX = moves[j][0];
+        int new_posY = moves[j][1];
+        std::vector<int> pos = { new_posX, new_posY };
+        int pos_arr[2] = { new_posX, new_posY };
+        board_copy.move_piece(board.white_pieces[i], pos_arr);
+        if (!board.in_check(board.grid[king_startX][king_startY])) {
+          valid_moves_from_check.push_back(pos);
+        }
+      }
+      // int startX = board_copy.white_pieces[i].position[0];
+      // int startY = board_copy.white_pieces[i].position[1];
+      // int start_pos[2] = { startX, startY };
   //     if (startX == king_startX && startY == king_startY) continue;
   //     // std::cout << startX << startY << std::endl;
   //     // get all valid moves
@@ -190,7 +201,7 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
   //     }
   //     board.move_piece(board.black_pieces[i], start_pos);
   //   } 
-  // }
+  } 
   return valid_moves_from_check;
 }
 
