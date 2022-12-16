@@ -16,7 +16,7 @@ int main() {
 
   Game game;
 
-  int endposking[2] = { 5 , 5 };
+  int endposking[2] = { 4 , 5 };
   game.board.move_piece(game.board.grid[7][4], endposking);
 
   int endposrook[2] = {2, 5};
@@ -31,7 +31,9 @@ int main() {
   game.board.move_piece(game.board.grid[0][3], pos2);
   game.board.move_piece(game.board.grid[0][7], pos3);
 
-  game.board.print_board();
+  // game.board.print_board();
+
+  // game.board.grid[0][0].moves_out_of_check(game.board);
   
   // int endpos1[2] = { 5, 4 };
   // game.board.move_piece(game.board.grid[6][5], endpos1);
@@ -44,10 +46,10 @@ int main() {
   // int endpos6[2] = { 5, 5 };
   // // game.board.print_board();
   // game.board.move_piece(game.board.grid[6][4], endpos6);
-  bool gameover = game.board.checkmate(game.board.grid[4][5]);
+  // bool gameover = game.board.checkmate(game.board.grid[5][5]);
   // game.board.move_piece(game.board.grid[0][0], endpos1);
   //  game.board.print_board();
-  std::cout << gameover << std::endl;
+  // std::cout << gameover << std::endl;
   // int endpos[2] = {5, 4};
   // game.board.move_piece(game.board.grid[7][4], endpos);
 

@@ -59,6 +59,12 @@ Board::Board() {
   grid = two_D_vector;
 }
 
+Board::Board(const Board& other) 
+  : grid(other.grid), white_pieces(other.white_pieces), black_pieces(other.black_pieces) 
+{
+
+}
+
 
 
 
@@ -68,16 +74,18 @@ void Board::print_board() {
   for (int i = 0; i < grid.size(); i++) {
     std::cout << nums[i];
     for (int j = 0; j < grid[i].size(); j++) {
-      std::cout << " " << grid[i][j].symbol << " ";
+      std::cout << "  " << grid[i][j].symbol << "  ";
     }
+    std::cout << std::endl;
     std::cout << std::endl;
   }
 
-  std::cout << "  ";
+  std::cout << "   ";
   for (int i = 0; i < 8; i++) {
-    std:: cout << alpha[i] << "  ";
+    std:: cout << alpha[i] << "    ";
   }
   std::cout << std::endl;
+
 }
 
 bool Board::move_piece(Piece& piece, int end_pos[2]) {
@@ -184,11 +192,12 @@ bool Board::checkmate(Piece& king) {
   // for (int i = 0; i < king_moves.size(); i++) {
   //     std::cout << king_moves[i][0] << king_moves[i][1] << std::endl;
   // }
-  bool zero_moves = false;
+  bool zero_moves = true;
   std::vector<std::vector<int>> invalid_squares;
   std::vector<int> pos = { 5, 5 };
   invalid_squares.push_back(pos);
   std::vector<std::vector<int>> moves;
+  std::vector<std::vector<int>> escape_moves; 
 
   if (color == "white") {
     // iterate over the black pieces vector 
@@ -205,10 +214,13 @@ bool Board::checkmate(Piece& king) {
     //   std::cout << invalid_squares[i][0] << invalid_squares[i][1] << std::endl;
     // }
     // now iterate over kings moves to see if all moves are included in invalid squares
-    for (int i = 0; i < king_moves.size(); i++) {
+    for (int j = 0; j < king_moves.size(); j++) {
       // if any move of kings is not included in invalid squares, king must not be in checkmate 
-      if (std::find(invalid_squares.begin(), invalid_squares.end(), king_moves[i]) == invalid_squares.end() ) {
-        zero_moves = true;
+      if (std::find(invalid_squares.begin(), invalid_squares.end(), king_moves[j]) == invalid_squares.end() ) {
+        // zero_moves = false;
+      
+        // std::cout << "found move" << std::endl;
+        escape_moves.push_back(king_moves[j]);
       } 
     }
   } else {
@@ -222,25 +234,34 @@ bool Board::checkmate(Piece& king) {
       invalid_squares.insert(std::end(invalid_squares), std::begin(moves), std::end(moves));
     }
     // now iterate over kings moves to see if all moves are included in invalid squares
-    for (int i = 0; i < king_moves.size(); i++) {
+    for (int j = 0; j < king_moves.size(); j++) {
       // if any move of kings is not included in invalid squares, king must not be in checkmate 
-      if (std::find(invalid_squares.begin(), invalid_squares.end(), king_moves[i]) == invalid_squares.end() ) {
-        zero_moves = true;
+      if (std::find(invalid_squares.begin(), invalid_squares.end(), king_moves[j]) == invalid_squares.end() ) {
+        escape_moves.push_back(king_moves[j]);
       } 
     }
-    std::vector<std::vector<int>> blocking_moves = king.moves_out_of_check(*this);
+    
 
     // if (blocking_moves.size() == 0 ) {
     //   std::cout << "false";
     // }
-    for (int k = 0; k < blocking_moves.size(); k++) {
-      std::cout << blocking_moves[k][0] << blocking_moves[k][1] << std::endl;
-    }
-    if (zero_moves == true && blocking_moves.size() == 0) {
-      return true;
-    } else {
-      return false;
-    }
+    // for (int k = 0; k < blocking_moves.size(); k++) {
+    //   std::cout << blocking_moves[k][0] << blocking_moves[k][1] << std::endl;
+    // }
+   
   }
-  // return false;
+  std::vector<std::vector<int>> blocking_moves = king.moves_out_of_check(*this);
+  // std::cout << zero_moves << " " << blocking_moves.size() << std::endl;
+  // for (int k = 0; k < blocking_moves.size(); k++) {
+  //     std::cout << blocking_moves[k][0] << blocking_moves[k][1] << std::endl;
+  //   }
+  std::cout << escape_moves.size() << std::endl;
+  std::cout << blocking_moves.size() << std::endl;
+   
+   if (escape_moves.size() == 0 && blocking_moves.size() == 0) {
+      return true;
+   } else {
+    return false;
+   }
+
 } 
