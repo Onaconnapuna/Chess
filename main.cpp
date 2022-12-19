@@ -46,7 +46,7 @@ int main() {
   // int endpos6[2] = { 5, 5 };
   // // game.board.print_board();
   // game.board.move_piece(game.board.grid[6][4], endpos6);
-  bool gameover = game.board.checkmate(game.board.grid[5][5]);
+  bool gameover = game.board.checkmate(game.board.grid[4][5]);
   // game.board.move_piece(game.board.grid[0][0], endpos1);
   //  game.board.print_board();
   std::cout << gameover << std::endl;
@@ -59,7 +59,7 @@ int main() {
   //   std::cout << moves[i][0] << moves[i][1] << std::endl;
   // }
 
-  game.board.print_board();
-
-
+  // game.board.print_board();
+  std::cout << game.board.grid[4][5].color << std::endl;
+  std::cout << game.board.in_check(game.board.grid[4][5]);
 }
