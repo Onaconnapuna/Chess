@@ -7,8 +7,8 @@
 #include "./pieces/knight.h"
 #include "./pieces/king.h"
 // #include "./pieces/rook.h"
-class RookPiece;
-class KingPiece;
+// class RookPiece;
+// class KingPiece;
 // class QueenPiece;
 class Piece;
 
@@ -31,9 +31,9 @@ int main() {
   game.board.move_piece(game.board.grid[0][3], pos2);
   game.board.move_piece(game.board.grid[0][7], pos3);
 
-  // game.board.print_board();
+  game.board.print_board();
 
-  // game.board.grid[0][0].moves_out_of_check(game.board);
+  // game.board.grid[0][0].moves_out_ of_check(game.board);
   
   // int endpos1[2] = { 5, 4 };
   // game.board.move_piece(game.board.grid[6][5], endpos1);
@@ -46,20 +46,36 @@ int main() {
   // int endpos6[2] = { 5, 5 };
   // // game.board.print_board();
   // game.board.move_piece(game.board.grid[6][4], endpos6);
-  bool gameover = game.board.checkmate(game.board.grid[4][5]);
+  // bool gameover = game.board.checkmate(game.board.grid[4][5]);
   // game.board.move_piece(game.board.grid[0][0], endpos1);
   //  game.board.print_board();
-  std::cout << gameover << std::endl;
+  // std::cout << gameover << std::endl;
   // int endpos[2] = {5, 4};
   // game.board.move_piece(game.board.grid[7][4], endpos);
-
-  // std::vector<std::vector<int>> moves = game.board.grid[5][4].valid_moves(game.board);
-
+  // std::cout << game.board.grid[6][0].color;
+  // std::vector<std::vector<int>> moves = game.board.grid[7][4].valid_moves(game.board);
+  // std::cout << moves.size() << std::endl;
   // for (int i = 0; i < moves.size(); i++) {
   //   std::cout << moves[i][0] << moves[i][1] << std::endl;
   // }
+  // PawnPiece pawn(7, 0, "white", "P");
+  // game.board.grid[6][0] = pawn;
 
-  // game.board.print_board();
-  std::cout << game.board.grid[4][5].color << std::endl;
-  std::cout << game.board.in_check(game.board.grid[4][5]);
+  for (int i = 0; i < game.board.grid[7].size(); i++) {
+    std::cout << game.board.grid[7][i].value << std::endl;
+  }
+
+  // for (int i = 0; i < game.board.black_pieces.size(); i++) {
+  //   std::cout << game.board.black_pieces[i].symbol<< std::endl; 
+  // }
+// std::cout << game.board.grid[6][0].color << std::endl;
+  // game.board.print_board() ;
+  // std::cout << game.board.grid[4][5].color << std::endl;
+  // std::cout << game.board.in_check(game.board.grid[4][5]);
 }
+
+
+// deep dup does work
+// need to test checkmate and check more
+// need to figure out why the last line is printing 8 extra pawns
+// find out why pawn piece colors are unknown

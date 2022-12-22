@@ -18,7 +18,7 @@ class Piece {
 
     void add_value(std::string value);
     std::string get_value();
-    std::vector<std::vector<int> > valid_moves(Board& board);
+    virtual std::vector<std::vector<int> > valid_moves(Board& board);
     std::vector<std::vector<int> > slideable_squares(Board& board);
     std::vector<std::vector<int>> moves_out_of_check(Board& board);  
     // function that iterates over pieces array to get all the moves that would 

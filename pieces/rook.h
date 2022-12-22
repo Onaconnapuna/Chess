@@ -1,6 +1,5 @@
 #ifndef _ROOK_
 #define _ROOk_
-
 #include "piece.h"
 
 class RookPiece : public Piece 

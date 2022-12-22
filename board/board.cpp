@@ -26,36 +26,38 @@ Board::Board() {
   KingPiece black_king(0, 4, "black", "k");
   QueenPiece black_queen(0, 3, "black", "q");
   
-
   black_pieces = {rook_one, knight_one, bishop_one, black_queen, black_king, bishop_two, knight_two, rook_two};
- 
+  
+  two_D_vector[0] = black_pieces;
+  two_D_vector[7] = white_pieces;
 
-  for (int i = 0; i < 8; i++) {
-    if (i == 0) two_D_vector[i] = black_pieces;
-    if (i == 7) two_D_vector[i] = white_pieces;
+  for (int i = 1; i < 7; i++) {
 
     if (i == 1 ) {
-      for (int j = 0; j < 8; j++) {
-        PawnPiece pawn(i, j, "black", "p");
-        two_D_vector[i].push_back(pawn);
+      for (int x = 0; x < 8; x++) {
+        PawnPiece pawn(1, x, "black", "p");
+        two_D_vector[1].push_back(pawn);
+        black_pieces.push_back(pawn);
       } 
     }
 
     if (i == 6) {
-      for (int j = 0; j < 8; j++) {
-        PawnPiece pawn(i, j, "white", "P");
-        two_D_vector[i].push_back(pawn);
+      for (int y = 0; y < 8; y++) {
+        PawnPiece pawn(6, y, "white", "P");
+        two_D_vector[6].push_back(pawn);
+        white_pieces.push_back(pawn);
       } 
     }
 
+
     if (i > 1 && i < 6) { 
-      for (int j = 0; j < 8; j++) { 
-        NullPiece null_piece(i, j);
+      for (int k = 0; k < 8; k++) { 
+        NullPiece null_piece(i, k);
         two_D_vector[i].push_back(null_piece);
       }
     }  
+    
   }
-
   grid = two_D_vector;
 }
 
@@ -71,7 +73,7 @@ Board::Board(const Board& other)
 void Board::print_board() {
   std::vector<std::string> alpha = { "A", "B", "C", "D", "E", "F", "G", "H" };
   std::vector<int> nums = { 8, 7, 6, 5, 4, 3, 2, 1};
-  for (int i = 0; i < grid.size(); i++) {
+  for (int i = 0; i < 8; i++) {
     std::cout << nums[i];
     for (int j = 0; j < grid[i].size(); j++) {
       std::cout << "  " << grid[i][j].symbol << "  ";
@@ -97,10 +99,6 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
 
   int end_x = end_pos[0];
   int end_y = end_pos[1];
-
-  // bool inboundsX = 0 <= end_x && end_x < 8;
-  // bool inboundsY = 0 <= end_y && end_y < 8;
-  // if (!inboundsX || !inboundsY) return false; 
 
   std::string end_color = grid[end_x][end_y].color;
 
@@ -194,8 +192,8 @@ bool Board::checkmate(Piece& king) {
   // }
   bool zero_moves = true;
   std::vector<std::vector<int>> invalid_squares;
-  std::vector<int> pos = { 5, 5 };
-  invalid_squares.push_back(pos);
+  // std::vector<int> pos = { 5, 5 };
+  // invalid_squares.push_back(pos);
   std::vector<std::vector<int>> moves;
   std::vector<std::vector<int>> escape_moves; 
 
@@ -251,7 +249,7 @@ bool Board::checkmate(Piece& king) {
    
   }
   std::vector<std::vector<int>> blocking_moves = king.moves_out_of_check(*this);
-  // std::cout << zero_moves << " " << blocking_moves.size() << std::endl;
+  std::cout << zero_moves << " " << blocking_moves.size() << std::endl;
   // for (int k = 0; k < blocking_moves.size(); k++) {
   //     std::cout << blocking_moves[k][0] << blocking_moves[k][1] << std::endl;
   //   }

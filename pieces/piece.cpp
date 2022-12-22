@@ -140,12 +140,10 @@ std::vector<std::vector<int>> Piece::valid_moves(Board& board) {
 std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board) 
 {
   Board board_copy(board);
-  board_copy.print_board();
   int king_startX = position[0];
   int king_startY = position[1];
   std::vector<std::vector<int>> valid_moves_from_check;
   if (color == "white") {
-    std::cout << "yes" << std::endl;
     // iterate over pieces
     for (int i = 0; i < board.white_pieces.size(); i++) {
       Board board_copy(board);
@@ -180,6 +178,9 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
       }
     } 
   }
+  // for (int i = 0; i < valid_moves_from_check.size(); i++) {
+  //   std::cout << valid_moves_from_check[i][0] << valid_moves_from_check[i][1] << std::endl;
+  // }
   return valid_moves_from_check;
 }
 
