@@ -5,7 +5,6 @@
 
 class PawnPiece : public Piece 
 {
-
   public:
     std::vector<std::vector<int>> forward_deltas;
     std::vector<std::vector<int>> capturing_deltas;
@@ -14,6 +13,7 @@ class PawnPiece : public Piece
     std::vector<std::vector<int>> valid_moves(Board& board);
     bool on_starting_row();
 
+    
   private:
     int forward_dir;
 };

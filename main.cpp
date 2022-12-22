@@ -58,17 +58,20 @@ int main() {
   // for (int i = 0; i < moves.size(); i++) {
   //   std::cout << moves[i][0] << moves[i][1] << std::endl;
   // }
-  // PawnPiece pawn(7, 0, "white", "P");
+  // PawnPiece pawn(6, 0, "white", "P");
   // game.board.grid[6][0] = pawn;
+  // std::cout << pawn.forward_dir;
 
-  for (int i = 0; i < game.board.grid[7].size(); i++) {
-    std::cout << game.board.grid[7][i].value << std::endl;
-  }
+  // for (int i = 0; i < game.board.grid[7].size(); i++) {
+  //   std::cout << game.board.grid[7][i].value << std::endl;
+  // }
+
+  // std::cout << game.board.grid[6][0].forward_dir << std::endl;
 
   // for (int i = 0; i < game.board.black_pieces.size(); i++) {
-  //   std::cout << game.board.black_pieces[i].symbol<< std::endl; 
+  //   std::cout << game.board.black_pieces[i].color<< std::endl; 
   // }
-// std::cout << game.board.grid[6][0].color << std::endl;
+// std::cout << game.board.grid[7][0].color << std::endl;
   // game.board.print_board() ;
   // std::cout << game.board.grid[4][5].color << std::endl;
   // std::cout << game.board.in_check(game.board.grid[4][5]);
@@ -77,5 +80,4 @@ int main() {
 
 // deep dup does work
 // need to test checkmate and check more
-// need to figure out why the last line is printing 8 extra pawns
 // find out why pawn piece colors are unknown

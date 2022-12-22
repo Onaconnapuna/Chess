@@ -5,12 +5,16 @@
 PawnPiece::PawnPiece(int posX, int posY, std::string add_color, std::string add_symbol) : Piece(posX, posY) {
   value = "pawn";
   symbol = add_symbol;
-  color = "white";
-  color = "white" ? forward_dir = 1 : forward_dir = -1;
+  color = add_color;
+  if (color == "white") forward_dir = 1;
+    else forward_dir = -1;
+  // forward_dir;
   slideable = false;
   forward_deltas = { { forward_dir, 0 }, { forward_dir + forward_dir, 0} };
   capturing_deltas = { { forward_dir, -forward_dir }, { forward_dir, forward_dir} };
 }
+
+
 
 bool PawnPiece::on_starting_row() 
 {
