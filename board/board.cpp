@@ -260,7 +260,7 @@ bool Board::checkmate(Piece& king) {
   // std::cout << escape_moves.size() << std::endl;
   // std::cout << blocking_moves.size() << std::endl;
   // std::cout << zero_moves << std::endl; 
-   if (zero_moves == 0 && blocking_moves.size() == 0) {
+   if (zero_moves == true && blocking_moves.size() == 0) {
       return true;
    } else {
       return false;

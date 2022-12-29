@@ -38,11 +38,12 @@ int main() {
 
   std::cout << gameover << std::endl;
 
-  // bool in_check = game.board.in_check(game.board.grid[4][5]);
+  // bool in_check = game.board.in_check(game.board.grid[4][6]);
   // std::cout << in_check << std::endl;
 
+  // game.board.print_board();
   
-}
+} 
 
 
 // deep dup does work
