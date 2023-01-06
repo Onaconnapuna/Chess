@@ -1,6 +1,9 @@
 #ifndef _BOARD_
 #define _BOARD_
 #include <vector>
+#include <memory>
+#include <boost/any.hpp>
+#include "boost/any.hpp"
 #include "../pieces/piece.h"
 #include "../pieces/null_piece.h"
 #include "../pieces/rook.h"
@@ -14,8 +17,8 @@ class Piece;
 class Board {
 
   public: 
-
     std::vector<std::vector<Piece>> grid;
+    // std::vector<std::vector<Piece>> grid;
     std::vector<Piece> white_pieces;
     std::vector<Piece> black_pieces;
 

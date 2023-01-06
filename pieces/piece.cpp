@@ -82,8 +82,8 @@ std::vector<std::vector<int>> Piece::slideable_squares(Board& board) {
   return moves;
 }
 
-std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
-  
+std::vector<std::vector<int>> Piece::slideable_moves(Board& board) 
+{
   std::vector<std::vector<int> > moves;
   bool valid_space = false;
   for (int i = 0; i < deltas.size(); i++) {
@@ -123,8 +123,8 @@ std::vector<std::vector<int>> Piece::slideable_moves(Board& board) {
   return moves;
 }
 
-std::vector<std::vector<int>> Piece::valid_moves(Board& board) { 
-  
+std::vector<std::vector<int>> Piece::valid_moves(Board& board) 
+{ 
   std::vector<std::vector<int> > moves;
 
   if (slideable == true) {

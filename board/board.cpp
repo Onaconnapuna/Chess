@@ -2,9 +2,11 @@
 #include <vector>
 #include <algorithm>
 #include "board.h" 
+#include <boost/any.hpp>
 
 Board::Board() {
-  std::vector<std::vector<Piece> > two_D_vector(8);
+  // std::vector<std::vector<std::unique_ptr<Piece>>> two_D_vector(8);
+  std::vector<std::vector<Piece>> two_D_vector(8);
 
   RookPiece rook_three(7, 0, "white", "R");
   RookPiece rook_four(7, 7, "white", "R");
@@ -14,6 +16,16 @@ Board::Board() {
   BishopPiece bishop_four(7, 5, "white", "B");
   KingPiece white_king(7, 4, "white", "K"); 
   QueenPiece white_queen(7, 3, "white", "Q");
+
+  // RookPiece* rook_three = new RookPiece (7, 0, "white", "R");
+  // RookPiece* rook_four = new RookPiece (7, 7, "white", "R");
+  // KnightPiece* knight_three = new KnightPiece (7, 1, "white", "N");
+  // KnightPiece* knight_four = new KnightPiece (7, 6, "white", "N");
+  // BishopPiece* bishop_three = new BishopPiece(7, 2, "white", "B");
+  // BishopPiece* bishop_four = new BishopPiece (7, 5, "white", "B");
+  // KingPiece* white_king = new KingPiece (7, 4, "white", "K"); 
+  // QueenPiece* white_queen = new QueenPiece(7, 3, "white", "Q");
+
 
   white_pieces = {rook_three, knight_three, bishop_three, white_queen, white_king, bishop_four, knight_four, rook_four};
 

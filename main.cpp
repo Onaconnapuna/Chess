@@ -17,13 +17,14 @@ int main() {
 
   Game game;
 
-  PawnPiece pawn(5, 5, "white" , "P");
-  std::cout << pawn.on_starting_row()<< std::endl;
-  game.board.grid[5][5] = pawn;
-  std::vector<std::vector<int>> moves = pawn.valid_movesP(game.board);
-  for (int i = 0; i < moves.size(); i++) {
-    std::cout << moves[i][0] << moves[i][1] << std::endl;
-  }
+  // PawnPiece pawn(5, 5, "white" , "P");
+  // std::cout << pawn.on_starting_row()<< std::endl;
+  // game.board.grid[5][5] = pawn;
+  // std::vector<std::vector<int>> moves = pawn.valid_movesP(game.board);
+  // for (int i = 0; i < moves.size(); i++) {
+  //   std::cout << moves[i][0] << moves[i][1] << std::endl;
+  // }
+
   // game.board.move_piece(game.board.grid[7][4], endposking);
 
   // int endposrook[2] = {2, 5};
