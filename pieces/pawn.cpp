@@ -1,4 +1,5 @@
 #include "pawn.h"
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -8,7 +9,6 @@ PawnPiece::PawnPiece(int posX, int posY, std::string add_color, std::string add_
   color = add_color;
   if (color == "white") forward_dir = 1;
     else forward_dir = -1;
-  // forward_dir;
   slideable = false;
   forward_deltas = { { forward_dir, 0 }, { forward_dir + forward_dir, 0} };
   capturing_deltas = { { forward_dir, -forward_dir }, { forward_dir, forward_dir} };
@@ -27,12 +27,14 @@ bool PawnPiece::on_starting_row()
   return starting;
 }
 
-std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board) 
+std::vector<std::vector<int>> PawnPiece::valid_movesP(Board& board) 
 {
+  std::cout << "was called" << std::endl;
   std::vector<std::vector<int>> moves;
+  std::cout << "declared moves" << std::endl;
   int board_x = position[0];
   int board_y = position[1];
- 
+  std::cout << "declared board pos" << std::endl;
   if (on_starting_row()) {
     for (int i = 0; i < forward_deltas.size(); i++) {
       int x = deltas[i][0];
@@ -40,26 +42,33 @@ std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board)
       int adj_x = x + board_x;
       int adj_y = y + board_y;
       if (board.grid[adj_x][adj_y].value == "null_piece") {
-        moves.push_back( { adj_x, adj_y } );
+        std::vector<int> move = { adj_x, adj_y };
+        moves.push_back(move);
       }
     }
   } else {
     int adj_x = board_x;
     int adj_y = board_y;
     if (board.grid[adj_x + 1][adj_y].value == "null_piece") {
-      moves.push_back( { adj_x + 1, adj_y });
+      std::vector<int> move = { adj_x, adj_y };
+      moves.push_back(move);
     }
   }
+
+  std::cout << "checked starting row" << std::endl;
   
   for (int i = 0; i < capturing_deltas.size(); i++) {
-    int x = deltas[i][0];
-    int y = deltas[i][1];
+    int x = capturing_deltas[i][0];
+    int y = capturing_deltas[i][1];
     int adj_x = x + board_x;
     int adj_y = y + board_y;
+    std::cout << "checking capturing deltas" << std::endl;
     if (board.grid[adj_x][adj_y].color != "null_color" && board.grid[adj_x][adj_y].color != color) {
-      moves.push_back( { adj_x, adj_y} );
+      std::vector<int> move = { adj_x, adj_y };
+      moves.push_back(move);
     }
   }
 
   return moves;
 } 
+
