@@ -1,9 +1,10 @@
 #include <iostream>
 #include "game.h"
+// #include "../player/player.h"
+// class Player;
 
-Game::Game() 
-{
-  
+Game::Game() {
+ 
 }
 
 void Game::start_match(Board& board) 

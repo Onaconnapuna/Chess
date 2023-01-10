@@ -1,5 +1,10 @@
 #include "player.h"
 
-void add_color(Player& player, std::string new_color) {
-  player.color = new_color;
+Player::Player(std::string new_color) {
+  color = new_color;
+}
+
+void make_move()
+{
+  
 }

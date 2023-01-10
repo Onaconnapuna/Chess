@@ -9,7 +9,6 @@ class Game {
     Player player_white;
     Player player_black; 
     std::string current_player = "white";
-
     Game();
     void start_match(Board& board);
     void display_moves(Board& board);

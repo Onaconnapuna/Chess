@@ -7,6 +7,8 @@ class Player {
   public:
 
     std::string color;
+    Player(std::string new_color);
+    void make_move();
 
 };
 
