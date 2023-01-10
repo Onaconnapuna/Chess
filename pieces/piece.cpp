@@ -9,6 +9,8 @@ Piece::Piece(int posX, int posY) {
   position = { posX, posY };
 }
 
+// Piece::Piece(const Piece& other) : 
+
 void Piece::add_value(std::string value) {
   value = value;
 }
@@ -41,6 +43,51 @@ std::vector<std::vector<int>> Piece::stepable_moves(Board& board) {
   }
   return moves;
 }
+
+// std::vector<std::vector<int>> Piece::valid_movesP(Board& board, PawnPiece& pawn) 
+// {
+//    std::cout << "was called" << std::endl;
+//   std::vector<std::vector<int>> moves;
+//   std::cout << "declared moves" << std::endl;
+//   int board_x = position[0];
+//   int board_y = position[1];
+//   std::cout << "declared board pos" << std::endl;
+//   if (pawn.on_starting_row()) {
+//     for (int i = 0; i < pawn.forward_deltas.size(); i++) {
+//       int x = deltas[i][0];
+//       int y = deltas[i][1];
+//       int adj_x = x + board_x;
+//       int adj_y = y + board_y;
+//       if (board.grid[adj_x][adj_y].value == "null_piece") {
+//         std::vector<int> move = { adj_x, adj_y };
+//         moves.push_back(move);
+//       }
+//     }
+//   } else {
+//     int adj_x = board_x;
+//     int adj_y = board_y;
+//     if (board.grid[adj_x + 1][adj_y].value == "null_piece") {
+//       std::vector<int> move = { adj_x, adj_y };
+//       moves.push_back(move);
+//     }
+//   }
+
+//   std::cout << "checked starting row" << std::endl;
+  
+//   for (int i = 0; i < pawn.capturing_deltas.size(); i++) {
+//     int x = pawn.capturing_deltas[i][0];
+//     int y = pawn.capturing_deltas[i][1];
+//     int adj_x = x + board_x;
+//     int adj_y = y + board_y;
+//     std::cout << "checking capturing deltas" << std::endl;
+//     if (board.grid[adj_x][adj_y].color != "null_color" && board.grid[adj_x][adj_y].color != color) {
+//       std::vector<int> move = { adj_x, adj_y };
+//       moves.push_back(move);
+//     }
+//   }
+
+//   return moves;
+// }
 
 std::vector<std::vector<int>> Piece::slideable_squares(Board& board) {
   
@@ -149,9 +196,8 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
       if (board_copy.white_pieces[i].value == "king") continue;
       int piece_startX = board_copy.white_pieces[i].position[0];
       int piece_startY = board_copy.white_pieces[i].position[1];
-      // get the valid moves of each piece of the same color
+      //find each valid move for every piece
       std::vector<std::vector<int>> moves = board_copy.white_pieces[i].valid_moves(board_copy);
-      // iterate over valid moves, move the piece and check if the king is still in check
       for (int j = 0; j < moves.size(); j++) {
         int new_posX = moves[j][0];
         int new_posY = moves[j][1];

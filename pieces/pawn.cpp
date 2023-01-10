@@ -27,7 +27,7 @@ bool PawnPiece::on_starting_row()
   return starting;
 }
 
-std::vector<std::vector<int>> PawnPiece::valid_movesP(Board& board) 
+std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board) 
 {
   std::cout << "was called" << std::endl;
   std::vector<std::vector<int>> moves;

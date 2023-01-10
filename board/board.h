@@ -13,14 +13,16 @@
 #include "../pieces/king.h"
 #include "../pieces/pawn.h"
 class Piece;
+class PawnPiece;
 
 class Board {
 
   public: 
     std::vector<std::vector<Piece>> grid;
-    // std::vector<std::vector<Piece>> grid;
     std::vector<Piece> white_pieces;
     std::vector<Piece> black_pieces;
+    std::vector<PawnPiece> white_pawns;
+    std::vector<PawnPiece> black_pawns;
 
     Board();
     Board(const Board& other);

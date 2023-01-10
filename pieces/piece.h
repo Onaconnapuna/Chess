@@ -15,7 +15,7 @@ class Piece {
     std::vector<std::vector<int> > deltas;
 
     Piece(int posX, int posY);
-
+    // Piece(const Piece& other);
     void add_value(std::string value);
     std::string get_value();
     virtual std::vector<std::vector<int> > valid_moves(Board& board);

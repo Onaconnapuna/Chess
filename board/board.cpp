@@ -49,7 +49,7 @@ Board::Board() {
       for (int x = 0; x < 8; x++) {
         PawnPiece pawn(1, x, "black", "p");
         two_D_vector[1].push_back(pawn);
-        black_pieces.push_back(pawn);
+        black_pawns.push_back(pawn);
       } 
     }
 
@@ -57,7 +57,7 @@ Board::Board() {
       for (int y = 0; y < 8; y++) {
         PawnPiece pawn(6, y, "white", "P");
         two_D_vector[6].push_back(pawn);
-        white_pieces.push_back(pawn);
+        white_pawns.push_back(pawn);
       } 
     }
 
