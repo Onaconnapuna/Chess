@@ -211,6 +211,24 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
       int start_pos[2] = { piece_startX, piece_startY };
       board_copy.move_piece(board_copy.white_pieces[i], start_pos);
     } 
+    for (int k = 0; k < board_copy.white_pawns.size(); k++) {
+      int piece_startX = board_copy.white_pawns[k].position[0];
+      int piece_startY = board_copy.white_pawns[k].position[1];
+      std::cout << piece_startX << piece_startY << std::endl;
+      std::vector<std::vector<int>> moves = board_copy.white_pawns[k].valid_moves(board_copy);
+      for (int j = 0; j < moves.size(); j++) {
+        int new_posX = moves[j][0];
+        int new_posY = moves[j][1];
+        std::vector<int> pos = { new_posX, new_posY };
+        int pos_arr[2] = { new_posX, new_posY };
+        board_copy.move_piece(board_copy.white_pawns[k], pos_arr);
+        if (!board_copy.in_check(board_copy.grid[king_startX][king_startY])) {
+          valid_moves_from_check.push_back(pos);
+        }
+      }
+      int start_pos[2] = { piece_startX, piece_startY };
+      board_copy.move_piece(board_copy.white_pawns[k], start_pos);
+    }
   } else {
     // do the same but for black
      for (int i = 0; i < board.black_pieces.size(); i++) {

@@ -7,8 +7,8 @@ PawnPiece::PawnPiece(int posX, int posY, std::string add_color, std::string add_
   value = "pawn";
   symbol = add_symbol;
   color = add_color;
-  if (color == "white") forward_dir = 1;
-    else forward_dir = -1;
+  if (color == "white") forward_dir = -1;
+    else forward_dir = 1;
   slideable = false;
   forward_deltas = { { forward_dir, 0 }, { forward_dir + forward_dir, 0} };
   capturing_deltas = { { forward_dir, -forward_dir }, { forward_dir, forward_dir} };
@@ -35,21 +35,28 @@ std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board)
   int board_x = position[0];
   int board_y = position[1];
   std::cout << "declared board pos" << std::endl;
+  // checkin if on starting pos, if so checking the first 2 positions.
   if (on_starting_row()) {
+    std::cout << "got here first" << std::endl;
     for (int i = 0; i < forward_deltas.size(); i++) {
-      int x = deltas[i][0];
-      int y = deltas[i][1];
+      int x = forward_deltas[i][0];
+      int y = forward_deltas[i][1];
+      std::cout << "got here" << std::endl;
       int adj_x = x + board_x;
       int adj_y = y + board_y;
-      if (board.grid[adj_x][adj_y].value == "null_piece") {
+      if (board.grid[adj_x][adj_y].value == "empty_space") {
         std::vector<int> move = { adj_x, adj_y };
         moves.push_back(move);
+        std::cout << "pushed move" << std::endl;
       }
     }
+    std::cout << "done" << std::endl;
+    // check if piece can move in its forward dir;
   } else {
     int adj_x = board_x;
     int adj_y = board_y;
-    if (board.grid[adj_x + 1][adj_y].value == "null_piece") {
+    bool inboundsX = 0 <= adj_x < 8;
+    if (inboundsX && board.grid[adj_x + forward_dir][adj_y].value == "empty_space") {
       std::vector<int> move = { adj_x, adj_y };
       moves.push_back(move);
     }
@@ -62,8 +69,12 @@ std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board)
     int y = capturing_deltas[i][1];
     int adj_x = x + board_x;
     int adj_y = y + board_y;
+
+    bool inboundsX = 0 <= adj_x && adj_x < 8; 
+    bool inboundsY = 0 <= adj_y && adj_y < 8;
+
     std::cout << "checking capturing deltas" << std::endl;
-    if (board.grid[adj_x][adj_y].color != "null_color" && board.grid[adj_x][adj_y].color != color) {
+    if (inboundsX && inboundsY && board.grid[adj_x][adj_y].color != "null_color" && board.grid[adj_x][adj_y].color != color) {
       std::vector<int> move = { adj_x, adj_y };
       moves.push_back(move);
     }

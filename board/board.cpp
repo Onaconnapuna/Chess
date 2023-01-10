@@ -74,7 +74,7 @@ Board::Board() {
 }
 
 Board::Board(const Board& other) 
-  : grid(other.grid), white_pieces(other.white_pieces), black_pieces(other.black_pieces) 
+  : grid(other.grid), white_pieces(other.white_pieces), white_pawns(other.white_pawns), black_pieces(other.black_pieces), black_pawns(other.black_pawns)
 {
 
 }
