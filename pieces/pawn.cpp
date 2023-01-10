@@ -29,28 +29,21 @@ bool PawnPiece::on_starting_row()
 
 std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board) 
 {
-  std::cout << "was called" << std::endl;
   std::vector<std::vector<int>> moves;
-  std::cout << "declared moves" << std::endl;
   int board_x = position[0];
   int board_y = position[1];
-  std::cout << "declared board pos" << std::endl;
   // checkin if on starting pos, if so checking the first 2 positions.
   if (on_starting_row()) {
-    std::cout << "got here first" << std::endl;
     for (int i = 0; i < forward_deltas.size(); i++) {
       int x = forward_deltas[i][0];
       int y = forward_deltas[i][1];
-      std::cout << "got here" << std::endl;
       int adj_x = x + board_x;
       int adj_y = y + board_y;
       if (board.grid[adj_x][adj_y].value == "empty_space") {
         std::vector<int> move = { adj_x, adj_y };
         moves.push_back(move);
-        std::cout << "pushed move" << std::endl;
       }
     }
-    std::cout << "done" << std::endl;
     // check if piece can move in its forward dir;
   } else {
     int adj_x = board_x;
@@ -61,8 +54,6 @@ std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board)
       moves.push_back(move);
     }
   }
-
-  std::cout << "checked starting row" << std::endl;
   
   for (int i = 0; i < capturing_deltas.size(); i++) {
     int x = capturing_deltas[i][0];
@@ -73,7 +64,6 @@ std::vector<std::vector<int>> PawnPiece::valid_moves(Board& board)
     bool inboundsX = 0 <= adj_x && adj_x < 8; 
     bool inboundsY = 0 <= adj_y && adj_y < 8;
 
-    std::cout << "checking capturing deltas" << std::endl;
     if (inboundsX && inboundsY && board.grid[adj_x][adj_y].color != "null_color" && board.grid[adj_x][adj_y].color != color) {
       std::vector<int> move = { adj_x, adj_y };
       moves.push_back(move);
