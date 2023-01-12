@@ -24,6 +24,6 @@ void Game::display_moves(Board& board)
 {
   if (current_player == "white") {
 
-
+ 
   }
 }
