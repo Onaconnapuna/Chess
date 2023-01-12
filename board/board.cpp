@@ -5,7 +5,6 @@
 #include <boost/any.hpp>
 
 Board::Board() {
-  // std::vector<std::vector<std::unique_ptr<Piece>>> two_D_vector(8);
   std::vector<std::vector<Piece>> two_D_vector(8);
 
   RookPiece rook_three(7, 0, "white", "R");
@@ -102,6 +101,8 @@ void Board::print_board() {
 
 }
 
+// we need to add deleting pieces on 
+
 bool Board::move_piece(Piece& piece, int end_pos[2]) {
   int start_x = piece.position[0];
   int start_y = piece.position[1];
@@ -136,6 +137,11 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
             black_pieces.erase(black_pieces.begin() + i);
           }
         } 
+        for (int i = 0; i < black_pawns.size(); i++) {
+          if (black_pawns[i].position[0] == end_x && black_pawns[i].position[1] == end_y) {
+            black_pawns.erase(black_pawns.begin() + i);
+          }
+        }
       } 
     } 
   } else if (color == "black") {
@@ -150,6 +156,11 @@ bool Board::move_piece(Piece& piece, int end_pos[2]) {
               white_pieces.erase(black_pieces.begin() + i);
             }
           } 
+          for (int i = 0; i < white_pawns.size(); i++) {
+          if (white_pawns[i].position[0] == end_x && white_pawns[i].position[1] == end_y) {
+            white_pawns.erase(white_pawns.begin() + i);
+          }
+        }
         } 
       } 
     } 

@@ -216,7 +216,6 @@ std::vector<std::vector<int>> Piece::moves_out_of_check(Board& board)
     for (int k = 0; k < board_copy.white_pawns.size(); k++) {
       int piece_startX = board_copy.white_pawns[k].position[0];
       int piece_startY = board_copy.white_pawns[k].position[1];
-      std::cout << piece_startX << piece_startY << std::endl;
       std::vector<std::vector<int>> moves = board_copy.white_pawns[k].valid_moves(board_copy);
       for (int j = 0; j < moves.size(); j++) {
         int new_posX = moves[j][0];
