@@ -1,6 +1,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <vector>
+#include <map>
 #include "./board/board.h"
 #include "./pieces/piece.h"
 #include "./game/game.h"
@@ -19,6 +20,19 @@ int main() {
 
   game.start_match(game.board);
 
+  std::map<std::string, std::vector<std::string>> moves = game.player_white.all_valid_moves(game.board);
+  std::map<std::string, std::vector<std::string>>::iterator it;
+  for (it = moves.begin(); it != moves.end(); it++) {
+    std::cout << it->first << std::endl;
+    for (int i = 0; i < it->second.size(); i++) {
+      std::cout << it->second[i]<< std::endl;
+    }
+  }
+
+  // std::vector<std::vector<int>> moves = game.board.grid[7][1].valid_moves(game.board);
+  //  for (int j = 0; j < moves.size(); j++) {
+  //       std::cout << moves[j][0] << moves[j][1] << std::endl;
+  //     }
   // int endposking[2] = { 5, 5 };
   // game.board.move_piece(game.board.grid[7][4], endposking);
 
