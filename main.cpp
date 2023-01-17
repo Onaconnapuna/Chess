@@ -29,7 +29,8 @@ int main() {
   //   }
   // }
 
-  game.player_white.display_moves(game.board);
+  std::cout << game.player_white.display_moves(game.board) << std::endl;
+  game.board.print_board();
 
   // std::vector<std::vector<int>> moves = game.board.grid[7][1].valid_moves(game.board);
   //  for (int j = 0; j < moves.size(); j++) {
@@ -64,7 +65,7 @@ int main() {
   // bool in_check = game.board.in_check(game.board.grid[4][6]);
   // std::cout << in_check << std::endl;
 
-  game.board.print_board();
+  // game.board.print_board();
   // std::cout << typeid(game.board.grid[0][0].PawnPiece).name() << std::endl;
   // game.board.grid[5][5].hello();
 
@@ -86,3 +87,14 @@ int main() {
 // deep dup does work
 // need to test checkmate and check more
 // find out why pawn piece colors are unknown
+
+
+
+
+// We can display moves to the console;
+// cin a string with the display moves func 
+//return it if its included as a key in the map, return empty if its not selected 
+// in another func calles select move, call display moves, if display moves returns an empty string, call again
+// in select_move if user types cancel, call display moves again
+// in another func, called make move, call select move, if select move fails to return a move
+ 

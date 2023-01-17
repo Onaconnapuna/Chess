@@ -28,7 +28,7 @@ std::map<std::string, std::vector<std::string>> Player::all_valid_moves(Board &b
       std::stringstream key_stream;
       int position_one = board.white_pawns[i].position[0];
       int position_two = board.white_pawns[i].position[1];
-      key_stream << board.white_pawns[i].symbol << alpha_grid[position_two] << numeric_grid[position_two];
+      key_stream << board.white_pawns[i].symbol << alpha_grid[position_two] << numeric_grid[position_one];
       std::string key = key_stream.str(); 
       std::vector<std::vector<int>> moves = board.white_pawns[i].valid_moves(board);
       valid_moves_map[key] = moves;
@@ -40,7 +40,7 @@ std::map<std::string, std::vector<std::string>> Player::all_valid_moves(Board &b
       std::stringstream key_stream;
        int position_one = board.black_pieces[i].position[0];
       int position_two = board.black_pieces[i].position[1];
-      key_stream << board.black_pieces[i].symbol << alpha_grid[position_one] << numeric_grid[position_two]; 
+      key_stream << board.black_pieces[i].symbol << alpha_grid[position_two] << numeric_grid[position_one]; 
       std::string key = key_stream.str();
 
       //get valid moves and add to map;
@@ -51,7 +51,7 @@ std::map<std::string, std::vector<std::string>> Player::all_valid_moves(Board &b
       std::stringstream key_stream;
       int position_one = board.black_pawns[i].position[0];
       int position_two = board.black_pawns[i].position[1];
-      key_stream << board.black_pawns[i].symbol << alpha_grid[position_one] << numeric_grid[position_two];
+      key_stream << board.black_pawns[i].symbol << alpha_grid[position_two] << numeric_grid[position_one];
       std::string key = key_stream.str(); 
       std::vector<std::vector<int>> moves = board.black_pawns[i].valid_moves(board);
       valid_moves_map[key] = moves;
@@ -82,17 +82,33 @@ std::map<std::string, std::vector<std::string>> Player::all_valid_moves(Board &b
   return all_moves_map;
 }
 
-void Player::display_moves(Board& board)
+std::string Player::display_moves(Board& board)
 {
+  std::string select_piece;
+  std::cout << "Select a piece by choosing a number a Piece with position; Example: KE1"<< std::endl;
   std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
   std::map<std::string, std::vector<std::string>>::iterator it;
   int num_it = 1;
   for (it = all_moves.begin(); it != all_moves.end(); it++ ) 
   {
-    std::cout << num_it << " " << it->first << "  ";
-    num_it+= 1;
+    if (it->second.size() != 0) 
+    { 
+      std::cout << num_it << ":" << " " << it->first << "  ";
+      num_it+= 1;
+    }
   }
   std::cout << std::endl;
+  std::cin >> select_piece; 
+
+  std::map<std::string, std::vector<std::string>>::iterator iter;
+
+  for (iter = all_moves.begin(); iter != all_moves.end(); iter++) {
+    if (iter->first == select_piece) {
+      std::cout << "match!";
+      return select_piece;
+    } 
+  }
+  return " ";
 }
 
 // void Player::make_move(std::map<std::string, std::vector<std::vector<int>>> moves, Board& board) 
