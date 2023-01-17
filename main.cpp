@@ -20,14 +20,16 @@ int main() {
 
   game.start_match(game.board);
 
-  std::map<std::string, std::vector<std::string>> moves = game.player_white.all_valid_moves(game.board);
-  std::map<std::string, std::vector<std::string>>::iterator it;
-  for (it = moves.begin(); it != moves.end(); it++) {
-    std::cout << it->first << std::endl;
-    for (int i = 0; i < it->second.size(); i++) {
-      std::cout << it->second[i]<< std::endl;
-    }
-  }
+  // std::map<std::string, std::vector<std::string>> moves = game.player_white.all_valid_moves(game.board);
+  // std::map<std::string, std::vector<std::string>>::iterator it;
+  // for (it = moves.begin(); it != moves.end(); it++) {
+  //   std::cout << it->first << std::endl;
+  //   for (int i = 0; i < it->second.size(); i++) {
+  //     std::cout << it->second[i]<< std::endl;
+  //   }
+  // }
+
+  game.player_white.display_moves(game.board);
 
   // std::vector<std::vector<int>> moves = game.board.grid[7][1].valid_moves(game.board);
   //  for (int j = 0; j < moves.size(); j++) {
