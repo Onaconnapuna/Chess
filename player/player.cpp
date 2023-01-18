@@ -112,12 +112,12 @@ std::string Player::display_moves(Board& board, std::map<std::string, std::vecto
       return select_piece;
     } 
   }
-  return " ";
+  display_moves(board, all_moves);
 }
 
-std::vector<int> Player::select_move(Board &board) 
+std::vector<int> Player::select_move(Board &board, std::map<std::string, std::vector<std::string>> all_moves) 
 {
-  std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
+  // std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
   std::string piece = display_moves(board, all_moves);
   bool piece_selected = false;
   std::vector<int> move_coords;
@@ -142,7 +142,7 @@ std::vector<int> Player::select_move(Board &board)
   std::cout << std::endl;
 
   std::cin >> move;
-  if (move == "cancel") select_move(board);
+  if (move == "cancel") select_move(board, all_moves);
   // converting chars to strings so that we may check for == in for loop;
 
   char coord_one_char = move[0];
@@ -169,8 +169,8 @@ std::vector<int> Player::select_move(Board &board)
 
   move_coords.push_back(coord_one);
   move_coords.push_back(coord_two);
-  std::cout << "got here" << std::endl;
-  // return move_coords;
+  // std::cout << "got here" << std::endl;
+  return move_coords;
   
   // move piece on the board;
 
@@ -179,11 +179,24 @@ std::vector<int> Player::select_move(Board &board)
 
 void Player::make_move(Board& board) 
 { 
+  std::string player_color = color;
   std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
   std::string selected_piece = display_moves(board, all_moves);
 
   // reformate select moves to take the map, reformat display moves to call itself;
-  std::vector<int> selected_moved = select_move(board);
+  std::vector<int> selected_moved = select_move(board, all_moves);
 
   // from here we will make move with board.move_piece
+  if (player_color == "white") {
+    char piece_symbol_c = selected_piece[0];
+
+    // KE1 these are not proper conversions yet;
+    int position_x = int(selected_piece[1]);
+    int position_y = int(selected_piece[2]);
+
+    std::string piece_symbol(1, piece_symbol_c);
+    for (int i = 0; i < board.white_pieces.size(); i++) {
+      
+    }
+  }
 }
