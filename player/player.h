@@ -16,7 +16,7 @@ class Player {
     std::map<std::string, std::vector<std::string>> all_valid_moves(Board& board);
     std::string display_moves(Board &board, std::map<std::string, std::vector<std::string>> all_moves);
     std::vector<int> select_move(Board &board);
-    // void make_move(std::map<std::string, std::vector<std::vector<std::string>>> moves, Board& board);
+    void make_move(Board& board);
 
 };
 

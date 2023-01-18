@@ -170,16 +170,20 @@ std::vector<int> Player::select_move(Board &board)
   move_coords.push_back(coord_one);
   move_coords.push_back(coord_two);
   std::cout << "got here" << std::endl;
-  return move_coords;
+  // return move_coords;
+  
+  // move piece on the board;
+
+
 }
 
-// void Player::make_move(std::map<std::string, std::vector<std::vector<int>>> moves, Board& board) 
-// {
-//   std::vector<std::string> numeric_grid = { "1", "2", "3", "4", "5", "6", "7", "8" }; 
-//   std::vector<std::string> alpha_grid = { "A", "B", "C", "D", "E", "F", "G", "H" };
-//   std::map<std::string, std::vector<std::vector<int>>>::iterator it = moves.begin();
-//   while (it != moves.end()) {
+void Player::make_move(Board& board) 
+{ 
+  std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
+  std::string selected_piece = display_moves(board, all_moves);
 
-//     ++it;
-//   } 
-// }
+  // reformate select moves to take the map, reformat display moves to call itself;
+  std::vector<int> selected_moved = select_move(board);
+
+  // from here we will make move with board.move_piece
+}

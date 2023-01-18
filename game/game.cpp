@@ -11,13 +11,13 @@ Game::Game()
 void Game::start_match(Board& board) 
 {
   if (current_player == "white") {
-      std::cout << "Whites turn" << std::endl;
+      std::cout << "White's Turn" << std::endl;
+      player_white.select_move(board);
     } else {
-      
+      std::cout << "Black's Turn" << std::endl;
   }
 
-
-  }
+}
 
 
 // void Game::display_moves(Board& board)
