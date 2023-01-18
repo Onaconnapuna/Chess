@@ -18,7 +18,12 @@ int main() {
 
   Game game;
 
-  game.start_match(game.board);
+  // game.start_match(game.board);
+
+  std::vector<int> moves = game.player_white.select_move(game.board);
+
+  std::cout << moves[0] << std::endl;
+  std::cout << moves[1] << std::endl;
 
   // std::map<std::string, std::vector<std::string>> moves = game.player_white.all_valid_moves(game.board);
   // std::map<std::string, std::vector<std::string>>::iterator it;
