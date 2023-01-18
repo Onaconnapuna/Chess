@@ -29,7 +29,7 @@ int main() {
   //   }
   // }
 
-  std::cout << game.player_white.display_moves(game.board) << std::endl;
+  // std::cout << game.player_white.display_moves(game.board) << std::endl;
   game.board.print_board();
 
   // std::vector<std::vector<int>> moves = game.board.grid[7][1].valid_moves(game.board);
@@ -96,5 +96,5 @@ int main() {
 //return it if its included as a key in the map, return empty if its not selected 
 // in another func calles select move, call display moves, if display moves returns an empty string, call again
 // in select_move if user types cancel, call display moves again
-// in another func, called make move, call select move, if select move fails to return a move
+// in another func, called make move, call select move, if select move fails to return a move call again;
  

@@ -12,7 +12,7 @@ class Game {
     Game();
     bool game_over = false;
     void start_match(Board& board);
-    void display_moves(Board& board);
+    // void display_moves(Board& board);
     
 };
 

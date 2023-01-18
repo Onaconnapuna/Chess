@@ -20,10 +20,10 @@ void Game::start_match(Board& board)
   }
 
 
-void Game::display_moves(Board& board)
-{
-  if (current_player == "white") {
+// void Game::display_moves(Board& board)
+// {
+//   if (current_player == "white") {
 
  
-  }
-}
+//   }
+// }

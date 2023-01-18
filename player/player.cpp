@@ -82,11 +82,11 @@ std::map<std::string, std::vector<std::string>> Player::all_valid_moves(Board &b
   return all_moves_map;
 }
 
-std::string Player::display_moves(Board& board)
+std::string Player::display_moves(Board& board, std::map<std::string, std::vector<std::string>> all_moves)
 {
   std::string select_piece;
   std::cout << "Select a piece by choosing a number a Piece with position; Example: KE1"<< std::endl;
-  std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
+  // std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
   std::map<std::string, std::vector<std::string>>::iterator it;
   int num_it = 1;
   for (it = all_moves.begin(); it != all_moves.end(); it++ ) 
@@ -109,6 +109,31 @@ std::string Player::display_moves(Board& board)
     } 
   }
   return " ";
+}
+
+std::vector<int> Player::select_move(Board &board) 
+{
+  std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
+  std::string move = display_moves(board, all_moves);
+  bool move_selected = false;
+  std::vector<int> move_coords;
+
+  std::vector<std::string> alpha_grid = { "A", "B", "C", "D", "E", "F", "G", "H" };
+  // std::vector<std::string> numeric_grid = { "8", "7", "6", "5", "4", "3", "2", "1" };
+  
+  while (move_selected == false) 
+  {
+    if (move != " ") {
+      move_selected = true;
+    } else {
+      move = display_moves(board, all_moves);
+    }
+  }
+  char coord_one_char = move[0];
+  char coord_two_char = move[1];
+
+  // char coord_two_char = move[1];
+  int coord_two = coord_two_char - '0';
 }
 
 // void Player::make_move(std::map<std::string, std::vector<std::vector<int>>> moves, Board& board) 
