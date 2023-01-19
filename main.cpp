@@ -20,6 +20,8 @@ int main() {
 
   // game.start_match(game.board);
   game.player_white.make_move(game.board);
+  // int pos[2] = { 4, 0 };
+  // game.board.move_piece(game.board.grid[6][0], pos);
   // std::vector<int> moves = game.player_white.select_move(game.board);
 
   // std::cout << moves[0] << std::endl;
@@ -102,4 +104,9 @@ int main() {
 // in another func calles select move, call display moves, if display moves returns an empty string, call again
 // in select_move if user types cancel, call display moves again
 // in another func, called make move, call select move, if select move fails to return a move call again;
- 
+
+
+// integrate pawns into move_piece;
+
+// if program needs to recall display moves, selected moves wont show
+// we also seg fault if we type in the wrong move

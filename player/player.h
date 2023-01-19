@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <algorithm>
 #include <sstream>
 #include "../board/board.h"
 class Board;

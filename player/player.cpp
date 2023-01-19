@@ -108,33 +108,22 @@ std::string Player::display_moves(Board& board, std::map<std::string, std::vecto
   for (iter = all_moves.begin(); iter != all_moves.end(); iter++) 
   {
     if (iter->first == select_piece) {
-      // std::cout << "match!";
       return select_piece;
     } 
   }
-  display_moves(board, all_moves);
+  std::cout << "invalid" << std::endl;
+  return "invalid";
 }
 
 std::vector<int> Player::select_move(Board &board, std::map<std::string, std::vector<std::string>> all_moves, std::string piece) 
 {
-  // std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
-  // std::string piece = display_moves(board, all_moves);
-  bool piece_selected = false;
   std::vector<int> move_coords;
 
-  std::vector<std::string> alpha_grid = { "H", "G", "F", "E", "D", "C", "B", "A" };
-  std::vector<std::string> numeric_grid = {"1", "2", "3", "4", "5", "6", "7", "8" };
-  
-  while (piece_selected == false) 
-  {
-    if (piece != " ") {
-      piece_selected = true;
-    } else {
-      piece = display_moves(board, all_moves);
-    }
-  } 
+  std::vector<std::string> alpha_grid = { "A", "B", "C", "D", "E", "F", "G", "H" };
+  std::vector<std::string> numeric_grid = {"8", "7", "6", "5", "4", "3", "2", "1" };
+
   std::string move;
-  std::cout << "Select a move for that piece, type cancel to go back to moves:" << std::endl;
+  std::cout << "Select a move for that piece, type cancel to go back to pieces:" << std::endl;
   for (int i = 0; i < all_moves[piece].size(); i++) 
   {
     std::cout << all_moves[piece][i] << " "; 
@@ -142,11 +131,17 @@ std::vector<int> Player::select_move(Board &board, std::map<std::string, std::ve
   std::cout << std::endl;
 
   std::cin >> move;
+
+  if (std::find(all_moves[piece].begin(), all_moves[piece].end(), move) == all_moves[piece].end()) {
+    make_move(board);
+  }
+  
   if (move == "cancel") make_move(board);
   // converting chars to strings so that we may check for == in for loop;
 
   char coord_one_char = move[0];
   char coord_two_char = move[1];
+
   int coord_one;
   int coord_two;
   // int coord_two = coord_two_char - '0';
@@ -155,25 +150,20 @@ std::vector<int> Player::select_move(Board &board, std::map<std::string, std::ve
  
   for (int i = 0; i < alpha_grid.size(); i++) {
     if (s_coord == alpha_grid[i]) {
-      // std::cout << "match" << std::endl;
       coord_one = i;
     }
   }
 
   for (int i = 0; i < numeric_grid.size(); i++) {
     if (s_coord_two == numeric_grid[i]) {
-      // std::cout << "match again" << std::endl;
       coord_two = i;
     }
   }
 
-  move_coords.push_back(coord_one);
   move_coords.push_back(coord_two);
-  // std::cout << "got here" << std::endl;
+  move_coords.push_back(coord_one);
+  std::cout << "Move Coord from Select Move: " << coord_one << coord_two << std::endl; 
   return move_coords;
-  
-  // move piece on the board;
-
 
 }
 
@@ -182,6 +172,7 @@ bool Player::make_move(Board& board)
   std::string player_color = color;
   std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
   std::string selected_piece = display_moves(board, all_moves);
+  if (selected_piece == "invalid") make_move(board);
 
   // reformate select moves to take the map, reformat display moves to call itself;
   std::vector<int> selected_move = select_move(board, all_moves, selected_piece);
@@ -191,10 +182,10 @@ bool Player::make_move(Board& board)
 
   char piece_symbol_c = selected_piece[0];
   std::string piece_symbol(1, piece_symbol_c);
-  std::cout << piece_symbol << std::endl;
+
   char coord_one_char = selected_piece[1];
   char coord_two_char = selected_piece[2];
-  std::cout << coord_one_char << coord_two_char << std::endl;
+
   int coord_one;
   int coord_two;
 
@@ -214,17 +205,15 @@ bool Player::make_move(Board& board)
       coord_two = i;
     }
   }
-  std::cout << "Coordinates: "<< coord_two << coord_one << std::endl;
+  
   // from here we will make move with board.move_piece
   if (player_color == "white") {
     for (int i = 0; i < board.white_pieces.size(); i++) {
       if (board.white_pieces[i].symbol == piece_symbol)
-      std::cout << "It did equal" << std::endl; 
         if (board.white_pieces[i].position[0] == coord_two && board.white_pieces[i].position[1] == coord_one) 
         {
           int coord_arr[2] = { selected_move[0], selected_move[1] };
           board.move_piece(board.white_pieces[i], coord_arr);
-          std::cout << "got here" << std::endl;
           return true;
         }
     }
