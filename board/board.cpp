@@ -78,9 +78,6 @@ Board::Board(const Board& other)
 
 }
 
-
-
-
 void Board::print_board() {
   std::vector<std::string> alpha = { "A", "B", "C", "D", "E", "F", "G", "H" };
   std::vector<int> nums = { 8, 7, 6, 5, 4, 3, 2, 1};
@@ -104,14 +101,18 @@ void Board::print_board() {
 // we need to add deleting pieces on 
 
 bool Board::move_piece(Piece& piece, int end_pos[2]) {
+  // std::cout << "I was called" << std::endl;
   int start_x = piece.position[0];
   int start_y = piece.position[1];
+  // std::cout << start_x << start_y << std::endl;
   std::string color = piece.color;
 
   if (grid[start_x][start_y].value == "empty_space") return false;
 
   int end_x = end_pos[0];
   int end_y = end_pos[1];
+
+  // std::cout << end_x << end_y << std::endl;
 
   std::string end_color = grid[end_x][end_y].color;
 
