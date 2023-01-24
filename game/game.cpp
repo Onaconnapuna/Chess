@@ -11,10 +11,15 @@ Game::Game()
 void Game::start_match(Board& board) 
 {
   if (current_player == "white") {
-      std::cout << "White's Turn" << std::endl;
-      // player_white.select_move(board);
-    } else {
-      std::cout << "Black's Turn" << std::endl;
+    bool move_made = player_white.make_move(board);
+    while (!move_made)  {
+      std::cout << move_made << std::endl;
+      move_made = player_white.make_move(board);
+      board.print_board();
+    }
+  } else {
+    bool move_made = player_black.make_move(board);
+    while (!move_made) player_black.make_move(board);
   }
 
 }

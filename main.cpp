@@ -19,7 +19,8 @@ int main() {
   Game game;
 
   // game.start_match(game.board);
-  game.player_white.make_move(game.board);
+  // game.player_white.make_move(game.board);
+  game.start_match(game.board);
   // int pos[2] = { 4, 0 };
   // game.board.move_piece(game.board.grid[6][0], pos);
   // std::vector<int> moves = game.player_white.select_move(game.board);
@@ -37,7 +38,7 @@ int main() {
   // }
 
   // std::cout << game.player_white.display_moves(game.board) << std::endl;
-  game.board.print_board();
+  // game.board.print_board();
 
   // std::vector<std::vector<int>> moves = game.board.grid[7][1].valid_moves(game.board);
   //  for (int j = 0; j < moves.size(); j++) {

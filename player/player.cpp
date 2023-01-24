@@ -132,11 +132,18 @@ std::vector<int> Player::select_move(Board &board, std::map<std::string, std::ve
 
   std::cin >> move;
 
-  if (std::find(all_moves[piece].begin(), all_moves[piece].end(), move) == all_moves[piece].end()) {
-    make_move(board);
+
+  // if the move is not found in the moves arr;
+  if (std::find(all_moves[piece].begin(), all_moves[piece].end(), move) == all_moves[piece].end()) {  
+    // our invalid flag will be { 8, 8 };
+    move_coords.push_back(9);
+    move_coords.push_back(9);
   }
   
-  if (move == "cancel") make_move(board);
+  if (move == "cancel") {
+    move_coords.push_back(9);
+    move_coords.push_back(9);
+  }
   // converting chars to strings so that we may check for == in for loop;
 
   char coord_one_char = move[0];
@@ -172,11 +179,16 @@ bool Player::make_move(Board& board)
   std::string player_color = color;
   std::map<std::string, std::vector<std::string>> all_moves = all_valid_moves(board);
   std::string selected_piece = display_moves(board, all_moves);
-  if (selected_piece == "invalid") make_move(board);
+  if (selected_piece == "invalid") return false;
+
 
   // reformate select moves to take the map, reformat display moves to call itself;
-  std::vector<int> selected_move = select_move(board, all_moves, selected_piece);
 
+
+  // the funtion is not completely working because the rest of the func needs to resolve from recursion
+  std::vector<int> selected_move = select_move(board, all_moves, selected_piece);
+  if (selected_move[0] && selected_move[1] == 9) return false;
+  // std::cout << selected_move[0] << selected_move[1] << std::endl;
   std::vector<std::string> alpha_grid = { "A", "B", "C", "D", "E", "F", "G", "H" };
   std::vector<std::string> numeric_grid = { "8", "7", "6", "5", "4", "3", "2", "1" };
 
@@ -194,14 +206,12 @@ bool Player::make_move(Board& board)
 
   for (int i = 0; i < alpha_grid.size(); i++) {
     if (s_coord == alpha_grid[i]) {
-      // std::cout << "match" << std::endl;
       coord_one = i;
     }
   }
 
   for (int i = 0; i < numeric_grid.size(); i++) {
     if (s_coord_two == numeric_grid[i]) {
-      // std::cout << "match again" << std::endl;
       coord_two = i;
     }
   }
